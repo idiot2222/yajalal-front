@@ -5,13 +5,12 @@
     <SideNav />
 
     <v-main>
-      <HelloWorld/>
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 import AppBar from "@/layouts/AppBar";
 import SideNav from "@/layouts/SideNav";
 
@@ -21,7 +20,6 @@ export default {
   components: {
     SideNav,
     AppBar,
-    HelloWorld,
   },
 
   data: () => ({

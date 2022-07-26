@@ -1,0 +1,92 @@
+<template>
+  <v-form
+      class="main"
+      ref="form"
+      v-model="valid"
+      lazy-validation
+  >
+    <h1 class="mb-5 headline">Log in</h1>
+    <v-text-field
+        v-model="username"
+        :counter="10"
+        :rules="usernameRules"
+        label="사용자 아이디"
+        required
+    ></v-text-field>
+
+    <v-text-field
+        type="password"
+        v-model="password"
+        :rules="passwordRules"
+        label="비밀번호"
+        required
+    ></v-text-field>
+
+
+    <v-checkbox
+        v-model="checkbox"
+        label="Remember me"
+        required
+    ></v-checkbox>
+
+    <v-btn
+        :disabled="!valid"
+        color="primary"
+        class="mr-4"
+        @click="validate"
+    >
+      로그인
+    </v-btn>
+
+    <v-btn
+        color="error"
+        class="mr-4"
+        @click="reset"
+    >
+      리셋
+    </v-btn>
+  </v-form>
+</template>
+
+<script>
+export default {
+    name: "LoginPage",
+    data() {
+      return {
+        valid: true,
+        username: '',
+        usernameRules: [
+          v => !!v || '아이디를 입력해주세요.',
+          v => (v && v.length <= 10) || '아이디는 10자 이하입니다.',
+        ],
+        password: '',
+        passwordRules: [
+          v => !!v || '비밀번호를 입력해주세요.',
+          v => (v && v.length >= 10) || '비밀번호는 10자 이상입니다.',
+        ],
+        checkbox: false,
+      }
+    },
+    methods: {
+      validate () {
+        this.$refs.form.validate()
+      },
+      reset () {
+        this.$refs.form.reset()
+      },
+    },
+    components: {
+    },
+}
+</script>
+
+<style>
+.main {
+  width: 400px;
+  height: 400px;
+  left: 50%;
+  top: 50%;
+  position: relative;
+  transform: translate(-50%, -50%);
+}
+</style>

@@ -38,26 +38,37 @@
         dense
     >
       <v-list-item-group
-          v-model="selectedItem"
           color="primary"
       >
-        <v-list-item link>
+        <v-list-item link to="/">
           <v-list-item-icon>
-            <v-icon>mdi-folder</v-icon>
+            <v-icon>mdi-home</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>My Files</v-list-item-title>
+          <v-list-item-title>Home</v-list-item-title>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item link to="user">
+          <v-list-item-icon>
+            <v-icon>mdi-account-circle</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>My Page</v-list-item-title>
+        </v-list-item>
+        <v-list-item link to="team">
           <v-list-item-icon>
             <v-icon>mdi-account-multiple</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Shared with me</v-list-item-title>
+          <v-list-item-title>Team</v-list-item-title>
         </v-list-item>
-        <v-list-item link>
+        <v-list-item link to="league">
           <v-list-item-icon>
-            <v-icon>mdi-star</v-icon>
+            <v-icon>mdi-trophy-variant</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Starred</v-list-item-title>
+          <v-list-item-title>League</v-list-item-title>
+        </v-list-item>
+        <v-list-item link to="config">
+          <v-list-item-icon>
+            <v-icon>mdi-cog</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Configuration</v-list-item-title>
         </v-list-item>
       </v-list-item-group>
     </v-list>
@@ -70,12 +81,8 @@ export default {
     data() {
       return {
         drawer: true,
-        items: [
-          { title: 'Home', icon: 'mdi-home-city' },
-          { title: 'My Account', icon: 'mdi-account' },
-          { title: 'Users', icon: 'mdi-account-group-outline' },
-        ],
         mini: true,
+
       }
     },
     methods: {
