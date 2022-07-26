@@ -1,6 +1,6 @@
 <template>
   <v-form
-      class="main"
+      class="login-main"
       ref="form"
       v-model="valid"
       lazy-validation
@@ -25,7 +25,7 @@
 
     <v-checkbox
         v-model="checkbox"
-        label="Remember me"
+        label="로그인 유지"
         required
     ></v-checkbox>
 
@@ -56,12 +56,12 @@ export default {
         valid: true,
         username: '',
         usernameRules: [
-          v => !!v || '아이디를 입력해주세요.',
+          v => !!v || '아이디를 입력해 주세요.',
           v => (v && v.length <= 10) || '아이디는 10자 이하입니다.',
         ],
         password: '',
         passwordRules: [
-          v => !!v || '비밀번호를 입력해주세요.',
+          v => !!v || '비밀번호를 입력해 주세요.',
           v => (v && v.length >= 10) || '비밀번호는 10자 이상입니다.',
         ],
         checkbox: false,
@@ -81,12 +81,12 @@ export default {
 </script>
 
 <style>
-.main {
+.login-main {
   width: 400px;
   height: 400px;
-  left: 50%;
-  top: 50%;
   position: relative;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 </style>
