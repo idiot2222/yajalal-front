@@ -5,7 +5,7 @@
       app
       permanent
   >
-    <v-list-item class="px-2 color" dark>
+    <v-list-item class="px-2" :style="{'background-color': mainColor}" dark>
       <v-list>
         <v-list-item class="px-2">
           <v-list-item-avatar>
@@ -38,7 +38,7 @@
         dense
     >
       <v-list-item-group
-          color="primary"
+          :color="subColor"
       >
         <v-list-item link to="/">
           <v-list-item-icon>
@@ -76,24 +76,31 @@
 </template>
 
 <script>
-export default {
-    name: "SideNav",
-    data() {
-      return {
-        drawer: true,
-        mini: true,
+import {mapState} from "vuex";
 
-      }
-    },
-    methods: {
-    },
-    components: {
-    },
+export default {
+  name: "SideNav",
+  data() {
+    return {
+      drawer: true,
+      mini: true,
+
+    }
+  },
+  methods: {},
+  components: {},
+  computed: {
+    ...mapState({
+      tabs: state => state.appVarTabs,
+      mainColor: state => state.mainColor,
+      subColor: state => state.subColor,
+    })
+  },
 }
 </script>
 
 <style>
-  .color {
-    background-color: #74b9ff
-  }
+.color {
+  background-color: #74b9ff
+}
 </style>

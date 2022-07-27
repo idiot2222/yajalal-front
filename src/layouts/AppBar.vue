@@ -1,13 +1,12 @@
 <template>
   <v-app-bar
       app
-      color="#74b9ff"
+      :color="mainColor"
       dark
   >
     <div class="d-flex align-center ps-5">
       <h1>Yajalal</h1>
     </div>
-
 
     <!--    <template v-slot:extension>-->
     <v-tabs
@@ -19,7 +18,8 @@
           align-with-title
           v-for="e in tabs"
           :key="e"
-      >{{ e }}
+      >
+        {{ e }}
       </v-tab>
     </v-tabs>
     <!--    </template>-->
@@ -29,18 +29,15 @@
     <v-btn
         to="/join"
         text
-        color="white"
     >
       회원가입
     </v-btn>
     <v-btn
         to="/login"
         text
-        color="white"
     >
       로그인
     </v-btn>
-
 
   </v-app-bar>
 </template>
@@ -51,14 +48,15 @@ import {mapState} from 'vuex';
 export default {
   name: "AppBar",
   data() {
-    return {
-    }
+    return {}
   },
   methods: {},
   components: {},
   computed: {
     ...mapState({
       tabs: state => state.appVarTabs,
+      mainColor: state => state.mainColor,
+      subColor: state => state.subColor,
     })
   },
 }

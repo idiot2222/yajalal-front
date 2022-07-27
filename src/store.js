@@ -5,18 +5,22 @@ Vue.use(Vuex);
 
 
 const colorMap = new Map();
-colorMap.set('Blue', ["#74b9ff", "#0984e3"]);
-colorMap.set('Green', ["#55efc4", "#00b894"]);
-colorMap.set('Purple', ["#a29bfe", "#6c5ce7"]);
-colorMap.set('Gray', ["#dfe6e9", "#b2bec3"]);
-colorMap.set('Yellow', ["#ffeaa7", "#fdcb6e"]);
-colorMap.set('Orange', ["#fab1a0", "#e17055"]);
-colorMap.set('Red', ["#ff7675", "#d63031"]);
-colorMap.set('Pink', ["#fd79a8", "#e84393"]);
-colorMap.set('Mint', ["#81ecec", "#00cec9"]);
-colorMap.set('Black', ["#636e72", "#2d3436"]);
+colorMap.set('파랑색', ["#74b9ff", "#0984e3"]);
+colorMap.set('초록색', ["#55efc4", "#00b894"]);
+colorMap.set('보라색', ["#a29bfe", "#6c5ce7"]);
+colorMap.set('주황색', ["#fab1a0", "#e17055"]);
+colorMap.set('빨간색', ["#ff7675", "#d63031"]);
+colorMap.set('분홍색', ["#fd79a8", "#e84393"]);
+colorMap.set('청록색', ["#81ecec", "#00cec9"]);
+colorMap.set('검정색', ["#636e72", "#2d3436"]);
+
+
+import persistedState from "vuex-persistedstate";
 
 const store = new Vuex.Store({
+    plugins: [
+        persistedState()
+    ],
 
     state: {
         appVarTabs: [],

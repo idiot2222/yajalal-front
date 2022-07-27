@@ -2,7 +2,7 @@
   <v-alert
       class="alert"
       :value="value"
-      color="blue"
+      :color="subColor"
       dark
       transition="scroll-y-reverse-transition"
   >
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: "AlertBox",
   data() {
@@ -20,7 +22,11 @@ export default {
   methods: {},
   components: {},
   props: ['message', 'value'],
-
+  computed: {
+    ...mapState({
+      subColor: state => state.subColor,
+    })
+  },
 }
 </script>
 

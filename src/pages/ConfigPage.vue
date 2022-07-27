@@ -45,7 +45,7 @@ export default {
       tabs: [],
       selectedColor: "",
       colors: [
-        "Blue", "Green", "Purple", "Gray", "Yellow", "Orange", "Red", "Pink", "Mint", "Black"
+        "파랑색", "초록색", "보라색", "주황색", "빨간색", "분홍색", "청록색", "검정색"
       ],
       alertState: false,
 
