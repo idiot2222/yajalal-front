@@ -50,33 +50,36 @@
 
 <script>
 export default {
-    name: "LoginPage",
-    data() {
-      return {
-        valid: true,
-        username: '',
-        usernameRules: [
-          v => !!v || '아이디를 입력해 주세요.',
-          v => (v && v.length <= 10) || '아이디는 10자 이하입니다.',
-        ],
-        password: '',
-        passwordRules: [
-          v => !!v || '비밀번호를 입력해 주세요.',
-          v => (v && v.length >= 10) || '비밀번호는 10자 이상입니다.',
-        ],
-        checkbox: false,
-      }
+  name: "LoginPage",
+  data() {
+    return {
+      tabs: [],
+      valid: true,
+      username: '',
+      usernameRules: [
+        v => !!v || '아이디를 입력해 주세요.',
+        v => (v && v.length <= 10) || '아이디는 10자 이하입니다.',
+      ],
+      password: '',
+      passwordRules: [
+        v => !!v || '비밀번호를 입력해 주세요.',
+        v => (v && v.length >= 10) || '비밀번호는 10자 이상입니다.',
+      ],
+      checkbox: false,
+    }
+  },
+  methods: {
+    validate() {
+      this.$refs.form.validate();
     },
-    methods: {
-      validate () {
-        this.$refs.form.validate()
-      },
-      reset () {
-        this.$refs.form.reset()
-      },
+    reset() {
+      this.$refs.form.reset();
     },
-    components: {
-    },
+  },
+  components: {},
+  mounted() {
+    this.$store.commit("setTabs", this.tabs);
+  }
 }
 </script>
 

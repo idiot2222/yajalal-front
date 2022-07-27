@@ -6,16 +6,17 @@
 
 <script>
 export default {
-    name: "HomePage",
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-    },
-    components: {
-    },
+  name: "HomePage",
+  data() {
+    return {
+      tabs: [],
+    }
+  },
+  methods: {},
+  components: {},
+  mounted() {
+    this.$store.commit("setTabs", this.tabs);
+  }
 }
 </script>
 

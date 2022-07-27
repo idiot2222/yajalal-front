@@ -6,16 +6,17 @@
 
 <script>
 export default {
-    name: "ConfigPage",
-    data() {
-      return {
-
-      }
-    },
-    methods: {
-    },
-    components: {
-    },
+  name: "ConfigPage",
+  data() {
+    return {
+      tabs: [],
+    };
+  },
+  methods: {},
+  components: {},
+  mounted() {
+    this.$store.commit("setTabs", this.tabs);
+  },
 }
 </script>
 

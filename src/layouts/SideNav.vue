@@ -44,31 +44,31 @@
           <v-list-item-icon>
             <v-icon>mdi-home</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Home</v-list-item-title>
+          <v-list-item-title>홈</v-list-item-title>
         </v-list-item>
         <v-list-item link to="user">
           <v-list-item-icon>
             <v-icon>mdi-account-circle</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>My Page</v-list-item-title>
+          <v-list-item-title>내 정보</v-list-item-title>
         </v-list-item>
         <v-list-item link to="team">
           <v-list-item-icon>
             <v-icon>mdi-account-multiple</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Team</v-list-item-title>
+          <v-list-item-title>팀 페이지</v-list-item-title>
         </v-list-item>
         <v-list-item link to="league">
           <v-list-item-icon>
             <v-icon>mdi-trophy-variant</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>League</v-list-item-title>
+          <v-list-item-title>리그 페이지</v-list-item-title>
         </v-list-item>
         <v-list-item link to="config">
           <v-list-item-icon>
             <v-icon>mdi-cog</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Configuration</v-list-item-title>
+          <v-list-item-title>설정</v-list-item-title>
         </v-list-item>
       </v-list-item-group>
     </v-list>
