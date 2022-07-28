@@ -16,6 +16,7 @@
     <v-text-field
         v-model="password"
         :rules="passwordRules"
+        type="password"
         label="비밀번호"
         required
     ></v-text-field>
