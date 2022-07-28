@@ -43,6 +43,8 @@
           v-model="date"
           scrollable
           locale="ko"
+          :min="minDate"
+          :max="maxDate"
       >
         <v-spacer></v-spacer>
         <v-btn
@@ -137,6 +139,8 @@ export default {
       dateRules: [
           v => !!v || '생년월일을 기입해 주세요.'
       ],
+      minDate: (new Date(new Date().setFullYear(1900, 0, 1)).toISOString()),
+      maxDate: new Date(Date.now()).toISOString(),
       gender: "",
       genderRules: [
         v => !!v || '성별을 체크해 주세요.'
