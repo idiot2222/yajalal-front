@@ -8,7 +8,7 @@
     <h1 class="mb-5 headline">Join</h1>
     <v-text-field
         v-model="username"
-        :counter="10"
+        :counter="20"
         :rules="usernameRules"
         label="사용자 아이디"
         required
@@ -94,7 +94,11 @@
 
     </v-radio-group>
 
-
+    <DialogBox
+        title="환영합니다🎉"
+        text="가입 되었습니다. 로그인 해주세요!"
+        :isOpened="dialog"
+    />
     <v-btn
         :disabled="!valid"
         color="primary"
@@ -103,7 +107,6 @@
     >
       회원가입
     </v-btn>
-
     <v-btn
         color="error"
         class="mr-4"
@@ -115,6 +118,9 @@
 </template>
 
 <script>
+import apiUtils from "@/apiUtils";
+import DialogBox from "@/components/DialogBox";
+
 export default {
   name: "JoinPage",
   data() {
@@ -124,8 +130,15 @@ export default {
       username: '',
       usernameRules: [
         v => !!v || '아이디를 입력해 주세요.',
-        v => (v && v.length <= 10) || '아이디는 10자 이하입니다.',
+        v => (v && v.length <= 20) || '아이디는 20자 이하입니다.',
+        () => {
+          const result = this.usernameError === "" || this.usernameError;
+          this.usernameError = "";
+
+          return result;
+        }
       ],
+      usernameError: "",
       password: '',
       passwordRules: [
         v => !!v || '비밀번호를 입력해 주세요.',
@@ -135,10 +148,17 @@ export default {
       emailRules: [
         v => !!v || '이메일을 기입해 주세요.',
         v => /.+@.+\..+/.test(v) || '이메일 양식이 틀렸습니다.',
+        () => {
+          const result = this.emailError === "" || this.emailError;
+          this.emailError = "";
+
+          return result;
+        }
       ],
+      emailError: "",
       date: '',
       dateRules: [
-          v => !!v || '생년월일을 기입해 주세요.'
+        v => !!v || '생년월일을 기입해 주세요.'
       ],
       minDate: (new Date(new Date().setFullYear(1900, 0, 1)).toISOString()),
       maxDate: new Date(Date.now()).toISOString(),
@@ -146,22 +166,54 @@ export default {
       genderRules: [
         v => !!v || '성별을 체크해 주세요.'
       ],
-      menu: false,
       modal: false,
-      menu2: false,
+      dialog: false,
     }
   },
   methods: {
     validate() {
-      this.$refs.form.validate()
-      console.log(this.date);
-      console.log(this.gender);
+      if (!this.$refs.form.validate()) {
+        return;
+      }
+
+      this.joinHandler();
     },
     reset() {
       this.$refs.form.reset()
     },
+    async joinHandler() {
+      const joinDto = {
+        username: this.username,
+        password: this.password,
+        email: this.email,
+        birthDate: this.date,
+        gender: this.gender
+      }
+
+      let result = await apiUtils.join(joinDto);
+
+      if(result !== "ok") {
+        await this.inputErrorHandler(result);
+
+        this.$refs.form.validate();
+      }
+      else {
+        this.dialog = true;
+      }
+    },
+    inputErrorHandler(result) {
+      for (const i in result) {
+        const error = result[i];
+
+        if (error.field === "username") {
+          this.usernameError = "이미 사용중인 사용자 아이디 입니다.";
+        } else if (error.field === "email") {
+          this.emailError = "이미 사용중인 이메일 입니다.";
+        }
+      }
+    }
   },
-  components: {},
+  components: {DialogBox},
   mounted() {
     this.$store.commit("setTabs", this.tabs);
   }

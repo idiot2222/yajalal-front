@@ -8,7 +8,7 @@
     <h1 class="mb-5 headline">Log in</h1>
     <v-text-field
         v-model="username"
-        :counter="10"
+        :counter="20"
         :rules="usernameRules"
         label="사용자 아이디"
         required
@@ -58,7 +58,7 @@ export default {
       username: '',
       usernameRules: [
         v => !!v || '아이디를 입력해 주세요.',
-        v => (v && v.length <= 10) || '아이디는 10자 이하입니다.',
+        v => (v && v.length <= 20) || '아이디는 20자 이하입니다.',
       ],
       password: '',
       passwordRules: [
