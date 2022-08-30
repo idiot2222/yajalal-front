@@ -65,12 +65,27 @@
       </v-date-picker>
     </v-dialog>
 
-    <v-text-field
-        v-model="email"
-        :rules="emailRules"
-        label="이메일"
-        required
-    ></v-text-field>
+    <v-row>
+      <v-col>
+        <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            :counter="30"
+            label="이메일"
+            required
+        ></v-text-field>
+      </v-col>
+      <v-icon>mdi-at</v-icon>
+      <v-col>
+        <v-select
+            label="도메인"
+            v-model="domain"
+            :items="domainItems"
+            :rules="domainRules"
+        >
+        </v-select>
+      </v-col>
+    </v-row>
 
     <v-radio-group
         label="성별"
@@ -103,7 +118,7 @@
         :disabled="!valid"
         color="primary"
         class="mr-4"
-        @click="validate"
+        @click="join"
     >
       회원가입
     </v-btn>
@@ -147,7 +162,8 @@ export default {
       email: '',
       emailRules: [
         v => !!v || '이메일을 기입해 주세요.',
-        v => /.+@.+\..+/.test(v) || '이메일 양식이 틀렸습니다.',
+        // v => /.+@.+\..+/.test(v) || '이메일 양식이 틀렸습니다.',
+        v => (v && v.length <= 30) || '이메일은 30자 이하입니다.',
         () => {
           const result = this.emailError === "" || this.emailError;
           this.emailError = "";
@@ -156,6 +172,13 @@ export default {
         }
       ],
       emailError: "",
+      domain: "",
+      domainItems: [
+        "naver.com", "gmail.com",
+      ],
+      domainRules: [
+        v => !!v || '도메인을 선택해 주세요.',
+      ],
       date: '',
       dateRules: [
         v => !!v || '생년월일을 기입해 주세요.'
@@ -171,7 +194,7 @@ export default {
     }
   },
   methods: {
-    validate() {
+    join() {
       if (!this.$refs.form.validate()) {
         return;
       }
@@ -185,19 +208,18 @@ export default {
       const joinDto = {
         username: this.username,
         password: this.password,
-        email: this.email,
+        email: `${this.email}@${this.domain}`,
         birthDate: this.date,
         gender: this.gender
       }
 
       let result = await apiUtils.join(joinDto);
 
-      if(result !== "ok") {
+      if (result !== "ok") {
         await this.inputErrorHandler(result);
 
         this.$refs.form.validate();
-      }
-      else {
+      } else {
         this.dialog = true;
       }
     },

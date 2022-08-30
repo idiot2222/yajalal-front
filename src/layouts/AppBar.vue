@@ -38,6 +38,12 @@
     >
       로그인
     </v-btn>
+    <v-btn
+        text
+        @click="logout"
+    >
+      로그아웃
+    </v-btn>
 
   </v-app-bar>
 </template>
@@ -50,14 +56,20 @@ export default {
   data() {
     return {}
   },
-  methods: {},
+  methods: {
+    logout() {
+      this.$store.commit('logout');
+
+      this.$router.push('/');
+    },
+  },
   components: {},
   computed: {
     ...mapState({
       tabs: state => state.appVarTabs,
       mainColor: state => state.mainColor,
       subColor: state => state.subColor,
-    })
+    }),
   },
 }
 </script>
