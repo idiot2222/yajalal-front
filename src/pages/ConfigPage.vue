@@ -42,7 +42,6 @@ export default {
   name: "ConfigPage",
   data() {
     return {
-      tabs: [],
       selectedColor: "",
       colors: [
         "파랑색", "초록색", "보라색", "주황색", "빨간색", "분홍색", "청록색", "검정색"
@@ -65,9 +64,6 @@ export default {
     }
   },
   components: {AlertBox},
-  mounted() {
-    this.$store.commit("setTabs", this.tabs);
-  },
 }
 </script>
 

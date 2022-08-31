@@ -18,9 +18,17 @@ const apiUtils =  {
             .then(res => res.data)
             .catch(err => console.log(err));
     },
-    userInfo() {
+    userInfo(id) {
+        const jwt = localStorage.getItem("auth");
+
         return axios
-            .get("http://localhost:8080/account/info/")
+            .get(`http://localhost:8080/account/info/${id}`, {
+                headers: {
+                    'Authorization': jwt
+                }
+            })
+            .then(res => res.data)
+            .catch(err => console.log(err));
     },
 }
 

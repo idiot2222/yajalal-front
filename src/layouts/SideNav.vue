@@ -47,12 +47,38 @@
           </v-list-item-icon>
           <v-list-item-title>홈</v-list-item-title>
         </v-list-item>
-        <v-list-item link to="user">
-          <v-list-item-icon>
-            <v-icon>mdi-account-circle</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>내 정보</v-list-item-title>
-        </v-list-item>
+
+        <v-list-group
+            link
+            to="user"
+            :color="subColor"
+            :value="false"
+        >
+          <template v-slot:activator>
+            <v-list-item-icon>
+              <v-icon>mdi-account-circle</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>유저 페이지</v-list-item-title>
+          </template>
+
+          <v-list-item-group
+              :color="subColor"
+          >
+            <v-list-item link to="user">
+              <v-list-item-icon>
+                <v-icon></v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>A</v-list-item-title>
+            </v-list-item>
+            <v-list-item link to="playerInfo">
+              <v-list-item-icon>
+                <v-icon></v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>B</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list-group>
+
         <v-list-item link to="team">
           <v-list-item-icon>
             <v-icon>mdi-account-multiple</v-icon>

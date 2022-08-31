@@ -57,7 +57,6 @@ export default {
   name: "LoginPage",
   data() {
     return {
-      tabs: [],
       valid: true,
       username: '',
       usernameRules: [
@@ -114,9 +113,6 @@ export default {
     },
   },
   components: {},
-  mounted() {
-    this.$store.commit("setTabs", this.tabs);
-  }
 }
 </script>
 

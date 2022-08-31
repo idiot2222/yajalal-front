@@ -8,22 +8,6 @@
       <h1>Yajalal</h1>
     </div>
 
-    <!--    <template v-slot:extension>-->
-    <v-tabs
-        class="ms-10"
-        style="display: inline"
-    >
-      <v-tab
-          class="ms-5"
-          align-with-title
-          v-for="e in tabs"
-          :key="e"
-      >
-        {{ e }}
-      </v-tab>
-    </v-tabs>
-    <!--    </template>-->
-
     <v-spacer></v-spacer>
 
     <v-btn
@@ -71,7 +55,6 @@ export default {
   components: {},
   computed: {
     ...mapState({
-      tabs: state => state.appVarTabs,
       mainColor: state => state.mainColor,
       subColor: state => state.subColor,
       currentUser: state => state.currentUser,

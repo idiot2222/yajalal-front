@@ -140,7 +140,6 @@ export default {
   name: "JoinPage",
   data() {
     return {
-      tabs: [],
       valid: true,
       username: '',
       usernameRules: [
@@ -236,9 +235,6 @@ export default {
     }
   },
   components: {DialogBox},
-  mounted() {
-    this.$store.commit("setTabs", this.tabs);
-  }
 }
 </script>
 

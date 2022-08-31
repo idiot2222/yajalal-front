@@ -11,15 +11,11 @@ const store = new Vuex.Store({
     ],
 
     state: {
-        appVarTabs: [],
         mainColor: "#74b9ff",
         subColor: "#0984e3",
         currentUser: "",
     },
     mutations: {
-        setTabs(state, tabs) {
-            this.state.appVarTabs = tabs;
-        },
         setColor(state, color) {
             let arr = colorMap.get(color);
 

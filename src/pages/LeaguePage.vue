@@ -9,14 +9,10 @@ export default {
   name: "LeaguePage",
   data() {
     return {
-      tabs: [],
     }
   },
   methods: {},
   components: {},
-  mounted() {
-    this.$store.commit("setTabs", this.tabs);
-  }
 }
 </script>
 
