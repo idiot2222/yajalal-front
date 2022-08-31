@@ -27,18 +27,21 @@
     <v-spacer></v-spacer>
 
     <v-btn
+        v-if="currentUser === ''"
         to="/join"
         text
     >
       회원가입
     </v-btn>
     <v-btn
+        v-if="currentUser === ''"
         to="/login"
         text
     >
       로그인
     </v-btn>
     <v-btn
+        v-else
         text
         @click="logout"
     >
@@ -57,10 +60,12 @@ export default {
     return {}
   },
   methods: {
-    logout() {
+    async logout() {
       this.$store.commit('logout');
 
-      this.$router.push('/');
+      if (window.location.pathname !== '/') {
+        await this.$router.push('/');
+      }
     },
   },
   components: {},
@@ -69,6 +74,7 @@ export default {
       tabs: state => state.appVarTabs,
       mainColor: state => state.mainColor,
       subColor: state => state.subColor,
+      currentUser: state => state.currentUser,
     }),
   },
 }

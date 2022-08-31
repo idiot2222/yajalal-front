@@ -94,7 +94,7 @@ export default {
       if (result.status === 200) {
         this.$store.commit('loginSuccessHandler', {
           auth: result.headers.authorization,
-          username: result.data,
+          currentUser: result.data,
         });
 
         await this.$router.push('/');

@@ -28,7 +28,7 @@ const store = new Vuex.Store({
         },
         async loginSuccessHandler(state, key) {
             await localStorage.setItem('auth', key.auth);
-            this.state.currentUser = key.username;
+            this.state.currentUser = key.currentUser;
         },
         logout() {
             apiUtils.logout();

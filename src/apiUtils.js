@@ -9,12 +9,12 @@ const apiUtils =  {
     },
     login(dto) {
         return axios
-            .post("http://localhost:8080/login", dto)
+            .post("http://localhost:8080/account/login", dto)
             .catch(err => console.log(err));
     },
     logout() {
         axios
-            .post("http://localhost:8080/logout")
+            .post("http://localhost:8080/account/logout")
             .then(res => res.data)
             .catch(err => console.log(err));
     },

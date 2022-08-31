@@ -6,22 +6,23 @@
       permanent
   >
     <v-list-item class="px-2" :style="{'background-color': mainColor}" dark>
-      <v-list>
-        <v-list-item class="px-2">
-          <v-list-item-avatar>
-            <v-img src="https://randomuser.me/api/portraits/women/85.jpg"></v-img>
-          </v-list-item-avatar>
-        </v-list-item>
-
-        <v-list-item link>
-          <v-list-item-content>
+      <v-list class="ml-3">
+        <v-list-item-content>
+          <div v-if="currentUser !== ''">
             <v-list-item-title class="text-h6">
-              박 보근
+              {{ currentUser.username }}
             </v-list-item-title>
-            <v-list-item-subtitle>pky2892@gmail.com</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+            <v-list-item-subtitle>{{ currentUser.email }}</v-list-item-subtitle>
+          </div>
+          <div v-else>
+            <v-list-item-title class="text-h6">
+              로그인 해주세요.
+            </v-list-item-title>
+          </div>
+        </v-list-item-content>
       </v-list>
+
+      <v-spacer></v-spacer>
 
       <v-btn
           icon
@@ -94,6 +95,7 @@ export default {
       tabs: state => state.appVarTabs,
       mainColor: state => state.mainColor,
       subColor: state => state.subColor,
+      currentUser: state => state.currentUser
     })
   },
 }
