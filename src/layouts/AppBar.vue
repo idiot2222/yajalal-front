@@ -11,14 +11,14 @@
     <v-spacer></v-spacer>
 
     <v-btn
-        v-if="currentUser === ''"
+        v-if="currentUserId === -1"
         to="/join"
         text
     >
       회원가입
     </v-btn>
     <v-btn
-        v-if="currentUser === ''"
+        v-if="currentUserId === -1"
         to="/login"
         text
     >
@@ -57,7 +57,7 @@ export default {
     ...mapState({
       mainColor: state => state.mainColor,
       subColor: state => state.subColor,
-      currentUser: state => state.currentUser,
+      currentUserId: state => state.currentUserId,
     }),
   },
 }

@@ -55,6 +55,7 @@ import apiUtils from "@/apiUtils";
 
 export default {
   name: "LoginPage",
+
   data() {
     return {
       valid: true,
@@ -74,6 +75,7 @@ export default {
       checkbox: false,
     }
   },
+
   methods: {
     login() {
       if (!this.$refs.form.validate()) {
@@ -87,6 +89,7 @@ export default {
 
       this.loginHandler(dto);
     },
+
     async loginHandler(dto) {
       const result = await apiUtils.login(dto);
 
@@ -101,6 +104,7 @@ export default {
         await this.loginFailHandler();
       }
     },
+
     async loginFailHandler() {
       this.loginFail = true;
 
@@ -108,11 +112,11 @@ export default {
 
       this.loginFail = false;
     },
+
     reset() {
       this.$refs.form.reset();
     },
   },
-  components: {},
 }
 </script>
 

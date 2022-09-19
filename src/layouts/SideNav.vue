@@ -8,11 +8,11 @@
     <v-list-item class="px-2" :style="{'background-color': mainColor}" dark>
       <v-list class="ml-3">
         <v-list-item-content>
-          <div v-if="currentUser !== ''">
+          <div v-if="currentUserNickname !== ''">
             <v-list-item-title class="text-h6">
-              {{ currentUser.username }}
+              {{ currentUserNickname }}
             </v-list-item-title>
-            <v-list-item-subtitle>{{ currentUser.email }}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ currentUsername }}</v-list-item-subtitle>
           </div>
           <div v-else>
             <v-list-item-title class="text-h6">
@@ -64,17 +64,17 @@
           <v-list-item-group
               :color="subColor"
           >
-            <v-list-item link to="user">
+            <v-list-item link to="/my-page">
               <v-list-item-icon>
                 <v-icon></v-icon>
               </v-list-item-icon>
-              <v-list-item-title>A</v-list-item-title>
+              <v-list-item-title>내 정보</v-list-item-title>
             </v-list-item>
-            <v-list-item link to="playerInfo">
+            <v-list-item link to="/player-info">
               <v-list-item-icon>
                 <v-icon></v-icon>
               </v-list-item-icon>
-              <v-list-item-title>B</v-list-item-title>
+              <v-list-item-title>선수 정보</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
         </v-list-group>
@@ -118,10 +118,10 @@ export default {
   components: {},
   computed: {
     ...mapState({
-      tabs: state => state.appVarTabs,
       mainColor: state => state.mainColor,
       subColor: state => state.subColor,
-      currentUser: state => state.currentUser
+      currentUserNickname: state => state.currentUserNickname,
+      currentUsername: state => state.currentUsername,
     })
   },
 }

@@ -1,35 +1,45 @@
 import axios from "axios";
 
+const server = `http://localhost:8080`;
+const jwt = localStorage.getItem("auth");
+
 const apiUtils =  {
     join(dto) {
         return axios
-            .post("http://localhost:8080/account/join", dto)
-            .then(res => res.data)
+            .post(`${server}/account/join`, dto)
             .catch(err => console.log(err));
     },
     login(dto) {
         return axios
-            .post("http://localhost:8080/account/login", dto)
-            .catch(err => console.log(err));
+            .post(`${server}/account/login`, dto)
+            .catch(err => err);
     },
     logout() {
         axios
-            .post("http://localhost:8080/account/logout")
+            .post(`${server}/account/logout`)
             .then(res => res.data)
             .catch(err => console.log(err));
     },
-    userInfo(id) {
-        const jwt = localStorage.getItem("auth");
-
+    getUserInfo(id) {
         return axios
-            .get(`http://localhost:8080/account/info/${id}`, {
+            .get(`${server}/account/info/${id}`, {
                 headers: {
                     'Authorization': jwt
                 }
             })
             .then(res => res.data)
-            .catch(err => console.log(err));
+            .catch(err => err);
     },
+    updateUserInfo(id, dto) {
+        console.log(dto)
+        return axios
+            .post(`${server}/account/update/${id}`, dto, {
+                headers: {
+                    'Authorization': jwt
+                }
+            })
+            .catch(err => console.log(err));
+    }
 }
 
 export default apiUtils;

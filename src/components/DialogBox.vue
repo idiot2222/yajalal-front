@@ -39,12 +39,12 @@ export default {
     redirectHandler(dialog) {
       dialog.value = false;
 
-      this.$router.push('/');
+      this.$router.push(this.redirectUrl);
     }
   },
   components: {},
   props: [
-    'title', 'text', 'isOpened'
+    'title', 'text', 'isOpened', 'redirectUrl'
   ],
   computed: {
     ...mapState({

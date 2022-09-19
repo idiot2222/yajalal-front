@@ -13,7 +13,9 @@ const store = new Vuex.Store({
     state: {
         mainColor: "#74b9ff",
         subColor: "#0984e3",
-        currentUser: "",
+        currentUserId: -1,
+        currentUserNickname: "",
+        currentUsername: "",
     },
     mutations: {
         setColor(state, color) {
@@ -23,14 +25,18 @@ const store = new Vuex.Store({
             this.state.subColor = arr[1];
         },
         async loginSuccessHandler(state, key) {
+            this.state.currentUserId = key.currentUser.id;
+            this.state.currentUsername = key.currentUser.username;
+            this.state.currentUserNickname = key.currentUser.nickname;
             await localStorage.setItem('auth', key.auth);
-            this.state.currentUser = key.currentUser;
         },
         logout() {
             apiUtils.logout();
 
             localStorage.removeItem('auth');
-            this.state.currentUser = "";
+            this.state.currentUserId = -1;
+            this.state.currentUsername = '';
+            this.state.currentUserNickname = '';
         },
     }
 });

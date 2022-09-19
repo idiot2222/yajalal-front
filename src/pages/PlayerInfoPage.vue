@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "ConfirmBox",
+  name: "PlayerInfoPage",
   data() {
     return {}
   },

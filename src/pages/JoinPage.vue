@@ -7,6 +7,13 @@
   >
     <h1 class="mb-5 headline">Join</h1>
     <v-text-field
+        v-model="nickname"
+        :counter="10"
+        :rules="nicknameRules"
+        label="사용자 닉네임"
+        required
+    ></v-text-field>
+    <v-text-field
         v-model="username"
         :counter="20"
         :rules="usernameRules"
@@ -109,11 +116,6 @@
 
     </v-radio-group>
 
-    <DialogBox
-        title="환영합니다🎉"
-        text="가입 되었습니다. 로그인 해주세요!"
-        :isOpened="dialog"
-    />
     <v-btn
         :disabled="!valid"
         color="primary"
@@ -129,6 +131,13 @@
     >
       리셋
     </v-btn>
+
+    <DialogBox
+        title="환영합니다🎉"
+        text="가입 되었습니다. 로그인 해주세요!"
+        :isOpened="dialog"
+        redirectUrl="/"
+    />
   </v-form>
 </template>
 
@@ -138,6 +147,7 @@ import DialogBox from "@/components/DialogBox";
 
 export default {
   name: "JoinPage",
+
   data() {
     return {
       valid: true,
@@ -145,6 +155,7 @@ export default {
       usernameRules: [
         v => !!v || '아이디를 입력해 주세요.',
         v => (v && v.length <= 20) || '아이디는 20자 이하입니다.',
+        v => /^[a-zA-Z0-9]*$/.test(v) || '아이디는 영문자와 숫자만 가능합니다.',
         () => {
           const result = this.usernameError === "" || this.usernameError;
           this.usernameError = "";
@@ -157,6 +168,17 @@ export default {
       passwordRules: [
         v => !!v || '비밀번호를 입력해 주세요.',
         v => (v && v.length >= 10) || '비밀번호는 10자 이상입니다.',
+      ],
+      nickname: '',
+      nicknameRules: [
+        v => !!v || '닉네임을 입력해 주세요.',
+        v => (v && v.length <= 10) || '닉네임은 10자 이하입니다.',
+        () => {
+          const result = this.usernameError === "" || this.usernameError;
+          this.usernameError = "";
+
+          return result;
+        }
       ],
       email: '',
       emailRules: [
@@ -183,7 +205,7 @@ export default {
         v => !!v || '생년월일을 기입해 주세요.'
       ],
       minDate: (new Date(new Date().setFullYear(1900, 0, 1)).toISOString()),
-      maxDate: new Date(Date.now()).toISOString(),
+      maxDate: new Date(Date.now() + 24 * 1000 * 3600).toISOString(),
       gender: "",
       genderRules: [
         v => !!v || '성별을 체크해 주세요.'
@@ -192,6 +214,7 @@ export default {
       dialog: false,
     }
   },
+
   methods: {
     join() {
       if (!this.$refs.form.validate()) {
@@ -207,6 +230,7 @@ export default {
       const joinDto = {
         username: this.username,
         password: this.password,
+        nickname: this.nickname,
         email: `${this.email}@${this.domain}`,
         birthDate: this.date,
         gender: this.gender
@@ -214,7 +238,7 @@ export default {
 
       let result = await apiUtils.join(joinDto);
 
-      if (result !== "ok") {
+      if (result.status !== 200) {
         await this.inputErrorHandler(result);
 
         this.$refs.form.validate();
@@ -234,6 +258,7 @@ export default {
       }
     }
   },
+
   components: {DialogBox},
 }
 </script>
