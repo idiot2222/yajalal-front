@@ -15,7 +15,8 @@
           dense
           outlined
           v-model="selectedColor"
-      ></v-select>
+      >
+      </v-select>
 
       <v-btn
           color="primary"

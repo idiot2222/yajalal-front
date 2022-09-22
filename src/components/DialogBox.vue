@@ -39,12 +39,16 @@ export default {
     redirectHandler(dialog) {
       dialog.value = false;
 
+      if(this.$props.reload) {
+        window.location.reload();
+      }
+
       this.$router.push(this.redirectUrl);
     }
   },
   components: {},
   props: [
-    'title', 'text', 'isOpened', 'redirectUrl'
+    'title', 'text', 'isOpened', 'redirectUrl', 'reload'
   ],
   computed: {
     ...mapState({

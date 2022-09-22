@@ -4,6 +4,8 @@ const server = `http://localhost:8080`;
 const jwt = localStorage.getItem("auth");
 
 const apiUtils =  {
+
+    // user -----------
     join(dto) {
         return axios
             .post(`${server}/account/join`, dto)
@@ -31,7 +33,6 @@ const apiUtils =  {
             .catch(err => err);
     },
     updateUserInfo(id, dto) {
-        console.log(dto)
         return axios
             .post(`${server}/account/update/${id}`, dto, {
                 headers: {
@@ -39,7 +40,48 @@ const apiUtils =  {
                 }
             })
             .catch(err => console.log(err));
-    }
+    },
+
+    // player -----------
+    createPlayer(userId, dto) {
+        return axios
+            .post(`${server}/player/create/${userId}`, dto, {
+                headers: {
+                    'Authorization': jwt
+                }
+            })
+            .then(res => res)
+            .catch(err => console.log(err));
+    },
+    getPlayerInfo(userId) {
+        return axios
+            .get(`${server}/player/info/${userId}`, {
+                headers: {
+                    'Authorization': jwt
+                }
+            })
+            .then(res => res)
+            .catch(err => err);
+    },
+    getPlayerAllInfo(userId) {
+        return axios
+            .get(`${server}/player/allInfo/${userId}`, {
+                headers: {
+                    'Authorization': jwt
+                }
+            })
+            .then(res => res)
+            .catch(err => err);
+    },
+    updatePlayerInfo(userId, dto) {
+        return axios
+            .post(`${server}/player/update/${userId}`, dto, {
+                headers: {
+                    'Authorization': jwt
+                }
+            })
+            .catch(err => console.log(err));
+    },
 }
 
 export default apiUtils;
