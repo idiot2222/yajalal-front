@@ -1,39 +1,24 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import persistedState from "vuex-persistedstate";
 import apiUtils from "@/apiUtils";
+import {createVuexPersistedState} from "vue-persistedstate/src/main";
 
 Vue.use(Vuex);
 
-function getPositionMap() {
-    const positionMap = new Map();
-
-    positionMap.set('투수', 'P');
-    positionMap.set('포수', 'C');
-    positionMap.set('1루수', 'FB');
-    positionMap.set('2루수', 'SB');
-    positionMap.set('3루수', 'TB');
-    positionMap.set('유격수', 'SS');
-    positionMap.set('좌익수', 'LF');
-    positionMap.set('중견수', 'CF');
-    positionMap.set('우익수', 'RF');
-
-    positionMap.set('P', '투수' );
-    positionMap.set('C', '포수');
-    positionMap.set('FB', '1루수');
-    positionMap.set('SB', '2루수');
-    positionMap.set('TB', '3루수');
-    positionMap.set('SS', '유격수');
-    positionMap.set('LF', '좌익수');
-    positionMap.set('CF', '중견수');
-    positionMap.set('RF', '우익수');
-
-    return positionMap;
-}
-
 const store = new Vuex.Store({
     plugins: [
-        persistedState()
+        createVuexPersistedState({
+            key: 'vuex',
+            storage: window.localStorage,
+            whiteList: [
+                'mainColor',
+                'subColor',
+                'currentUserId',
+                'currentUserNickname',
+                'currentUsername'
+            ],
+            blackList: []
+        }),
     ],
 
     state: {
@@ -68,6 +53,33 @@ const store = new Vuex.Store({
         },
     }
 });
+
+
+function getPositionMap() {
+    const positionMap = new Map();
+
+    positionMap.set('투수', 'P');
+    positionMap.set('포수', 'C');
+    positionMap.set('1루수', 'FB');
+    positionMap.set('2루수', 'SB');
+    positionMap.set('3루수', 'TB');
+    positionMap.set('유격수', 'SS');
+    positionMap.set('좌익수', 'LF');
+    positionMap.set('중견수', 'CF');
+    positionMap.set('우익수', 'RF');
+
+    positionMap.set('P', '투수' );
+    positionMap.set('C', '포수');
+    positionMap.set('FB', '1루수');
+    positionMap.set('SB', '2루수');
+    positionMap.set('TB', '3루수');
+    positionMap.set('SS', '유격수');
+    positionMap.set('LF', '좌익수');
+    positionMap.set('CF', '중견수');
+    positionMap.set('RF', '우익수');
+
+    return positionMap;
+}
 
 const colorMap = new Map();
 colorMap.set('파랑색', ["#74b9ff", "#0984e3"]);
