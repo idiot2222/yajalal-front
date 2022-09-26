@@ -30,7 +30,7 @@ const apiUtils =  {
                 }
             })
             .then(res => res.data)
-            .catch(err => err);
+            .catch(err => console.log(err));
     },
     updateUserInfo(id, dto) {
         return axios
@@ -71,7 +71,7 @@ const apiUtils =  {
                 }
             })
             .then(res => res)
-            .catch(err => err);
+            .catch(err => err.response);
     },
     updatePlayerInfo(userId, dto) {
         return axios
