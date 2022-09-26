@@ -79,7 +79,6 @@ export default {
   data() {
     return {
       playerInfo: {},
-      positionMap: new Map(),
     }
   },
 
@@ -98,19 +97,8 @@ export default {
   computed: {
     ...mapState({
       currentUserId: state => state.currentUserId,
+      positionMap: state => state.positionMap,
     })
-  },
-
-  created() {
-    this.positionMap.set('P', '투수' );
-    this.positionMap.set('C', '포수');
-    this.positionMap.set('FB', '1루수');
-    this.positionMap.set('SB', '2루수');
-    this.positionMap.set('TB', '3루수');
-    this.positionMap.set('SS', '유격수');
-    this.positionMap.set('LF', '좌익수');
-    this.positionMap.set('CF', '중견수');
-    this.positionMap.set('RF', '우익수');
   },
 
   async mounted() {

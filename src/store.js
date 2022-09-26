@@ -5,6 +5,32 @@ import apiUtils from "@/apiUtils";
 
 Vue.use(Vuex);
 
+function getPositionMap() {
+    const positionMap = new Map();
+
+    positionMap.set('투수', 'P');
+    positionMap.set('포수', 'C');
+    positionMap.set('1루수', 'FB');
+    positionMap.set('2루수', 'SB');
+    positionMap.set('3루수', 'TB');
+    positionMap.set('유격수', 'SS');
+    positionMap.set('좌익수', 'LF');
+    positionMap.set('중견수', 'CF');
+    positionMap.set('우익수', 'RF');
+
+    positionMap.set('P', '투수' );
+    positionMap.set('C', '포수');
+    positionMap.set('FB', '1루수');
+    positionMap.set('SB', '2루수');
+    positionMap.set('TB', '3루수');
+    positionMap.set('SS', '유격수');
+    positionMap.set('LF', '좌익수');
+    positionMap.set('CF', '중견수');
+    positionMap.set('RF', '우익수');
+
+    return positionMap;
+}
+
 const store = new Vuex.Store({
     plugins: [
         persistedState()
@@ -16,6 +42,8 @@ const store = new Vuex.Store({
         currentUserId: -1,
         currentUserNickname: "",
         currentUsername: "",
+        positions: ['투수', '포수', '1루수', '2루수', '3루수', '유격수', '좌익수', '중견수', '우익수'],
+        positionMap: getPositionMap(),
     },
     mutations: {
         setColor(state, color) {

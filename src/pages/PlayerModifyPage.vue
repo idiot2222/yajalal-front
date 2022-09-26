@@ -100,10 +100,6 @@ export default {
       valid: true,
       playerInfo: {},
       position: "",
-      positions: [
-        '투수', '포수', '1루수', '2루수', '3루수', '유격수', '좌익수', '중견수', '우익수'
-      ],
-      positionMap: new Map(),
 
       nameRules: [
         v => !!v || '이름을 기입해주세요.',
@@ -158,29 +154,9 @@ export default {
     },
     ...mapState({
       currentUserId: state => state.currentUserId,
+      positions: state => state.positions,
+      positionMap: state => state.positionMap,
     })
-  },
-
-  created() {
-    this.positionMap.set('투수', 'P');
-    this.positionMap.set('포수', 'C');
-    this.positionMap.set('1루수', 'FB');
-    this.positionMap.set('2루수', 'SB');
-    this.positionMap.set('3루수', 'TB');
-    this.positionMap.set('유격수', 'SS');
-    this.positionMap.set('좌익수', 'LF');
-    this.positionMap.set('중견수', 'CF');
-    this.positionMap.set('우익수', 'RF');
-
-    this.positionMap.set('P', '투수' );
-    this.positionMap.set('C', '포수');
-    this.positionMap.set('FB', '1루수');
-    this.positionMap.set('SB', '2루수');
-    this.positionMap.set('TB', '3루수');
-    this.positionMap.set('SS', '유격수');
-    this.positionMap.set('LF', '좌익수');
-    this.positionMap.set('CF', '중견수');
-    this.positionMap.set('RF', '우익수');
   },
 
   async mounted() {

@@ -136,10 +136,6 @@ export default {
         v => (v && v >= 30 && v <= 200) || '체중의 범위는 30이상 200이하입니다.'
       ],
       position: "",
-      positions: [
-        '투수', '포수', '1루수', '2루수', '3루수', '유격수', '좌익수', '중견수', '우익수'
-      ],
-      positionMap: new Map(),
       positionRules: [
         v => !!v || '최소 1개의 포지션을 선택해주세요.'
       ],
@@ -187,18 +183,6 @@ export default {
     },
   },
 
-  created() {
-    this.positionMap.set('투수', 'P');
-    this.positionMap.set('포수', 'C');
-    this.positionMap.set('1루수', 'FB');
-    this.positionMap.set('2루수', 'SB');
-    this.positionMap.set('3루수', 'TB');
-    this.positionMap.set('유격수', 'SS');
-    this.positionMap.set('좌익수', 'LF');
-    this.positionMap.set('중견수', 'CF');
-    this.positionMap.set('우익수', 'RF');
-  },
-
   components: {DialogBox},
 
   computed: {
@@ -210,6 +194,8 @@ export default {
     },
     ...mapState({
       currentUserId: state => state.currentUserId,
+      positions: state => state.positions,
+      positionMap: state => state.positionMap,
     })
   },
 }
