@@ -9,6 +9,7 @@ import ConfigPage from "@/pages/ConfigPage";
 import UserInfoPage from "@/pages/UserInfoPage";
 import PlayerInfoPage from "@/pages/PlayerInfoPage";
 import PlayerCreatePage from "@/pages/PlayerCreatePage";
+import PlayerModifyPage from "@/pages/PlayerModifyPage";
 
 Vue.use(VueRouter);
 
@@ -21,7 +22,7 @@ export const router = new VueRouter({
         {path: "/my-page", component: UserInfoPage},
         {path: "/player-info", component: PlayerInfoPage},
         {path: "/player-create", component: PlayerCreatePage},
-        {path: "/player-modify", component: PlayerInfoPage},
+        {path: "/player-modify", component: PlayerModifyPage},
         {path: "/team", component: TeamPage},
         {path: "/league", component: LeaguePage},
         {path: "/config", component: ConfigPage},

@@ -74,13 +74,15 @@ const apiUtils =  {
             .catch(err => err.response);
     },
     updatePlayerInfo(userId, dto) {
+        console.log(dto)
         return axios
             .post(`${server}/player/update/${userId}`, dto, {
                 headers: {
                     'Authorization': jwt
                 }
             })
-            .catch(err => console.log(err));
+            .then(res => res)
+            .catch(err => err.response);
     },
 }
 
