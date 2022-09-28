@@ -1,7 +1,17 @@
 import axios from "axios";
+import store from './store';
 
 const server = `http://localhost:8080`;
 const jwt = localStorage.getItem("auth");
+
+function jwtCheck(err) {
+    console.log(1)
+    if (err.response.data === "token expired") {
+        console.log(err.response.data)
+
+        store.commit('logout');
+    }
+}
 
 const apiUtils =  {
 
@@ -30,7 +40,10 @@ const apiUtils =  {
                 }
             })
             .then(res => res.data)
-            .catch(err => console.log(err));
+            .catch(err => {
+                jwtCheck(err);
+                console.log(err)
+            });
     },
     updateUserInfo(id, dto) {
         return axios
@@ -39,7 +52,10 @@ const apiUtils =  {
                     'Authorization': jwt
                 }
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                jwtCheck(err);
+                console.log(err)
+            });
     },
 
     // player -----------
@@ -51,7 +67,10 @@ const apiUtils =  {
                 }
             })
             .then(res => res)
-            .catch(err => console.log(err));
+            .catch(err => {
+                jwtCheck(err);
+                console.log(err)
+            });
     },
     getPlayerInfo(userId) {
         return axios
@@ -61,7 +80,10 @@ const apiUtils =  {
                 }
             })
             .then(res => res)
-            .catch(err => err);
+            .catch(err => {
+                jwtCheck(err);
+                return err;
+            });
     },
     getPlayerAllInfo(userId) {
         return axios
@@ -71,7 +93,10 @@ const apiUtils =  {
                 }
             })
             .then(res => res)
-            .catch(err => err.response);
+            .catch(err => {
+                jwtCheck(err);
+                return err.response;
+            });
     },
     updatePlayerInfo(userId, dto) {
         console.log(dto)
@@ -82,7 +107,10 @@ const apiUtils =  {
                 }
             })
             .then(res => res)
-            .catch(err => err.response);
+            .catch(err => {
+                jwtCheck(err);
+                return err.response
+            });
     },
 }
 
