@@ -150,6 +150,7 @@ export default {
 
   data() {
     return {
+      tabs: [],
       valid: true,
       username: '',
       usernameRules: [
@@ -216,6 +217,9 @@ export default {
   },
 
   methods: {
+    setTabs() {
+      this.$store.commit("setTabs", this.tabs);
+    },
     join() {
       if (!this.$refs.form.validate()) {
         return;
@@ -260,6 +264,10 @@ export default {
   },
 
   components: {DialogBox},
+
+  mounted() {
+    this.setTabs();
+  }
 }
 </script>
 

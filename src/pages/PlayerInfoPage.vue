@@ -78,11 +78,15 @@ export default {
 
   data() {
     return {
+      tabs: [],
       playerInfo: {},
     }
   },
 
   methods: {
+    setTabs() {
+      this.$store.commit("setTabs", this.tabs);
+    },
     convertPosition(position) {
       return this.positionMap.get(position);
     },
@@ -102,6 +106,8 @@ export default {
   },
 
   async mounted() {
+    this.setTabs();
+
     const result = await apiUtils.getPlayerAllInfo(this.currentUserId);
 
     if(result.status === 200) {

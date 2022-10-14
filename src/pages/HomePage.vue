@@ -7,12 +7,24 @@
 <script>
 export default {
   name: "HomePage",
+
   data() {
     return {
+      tabs: [],
     }
   },
-  methods: {},
+
+  methods: {
+    setTabs() {
+      this.$store.commit("setTabs", this.tabs);
+    },
+  },
+
   components: {},
+
+  mounted() {
+    this.setTabs();
+  }
 }
 </script>
 

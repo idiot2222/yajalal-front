@@ -58,6 +58,7 @@ export default {
 
   data() {
     return {
+      tabs: [],
       valid: true,
       username: '',
       usernameRules: [
@@ -77,6 +78,9 @@ export default {
   },
 
   methods: {
+    setTabs() {
+      this.$store.commit("setTabs", this.tabs);
+    },
     login() {
       if (!this.$refs.form.validate()) {
         return;
@@ -94,11 +98,6 @@ export default {
       const result = await apiUtils.login(dto);
 
       if (result.status === 200) {
-        this.$store.commit('loginSuccessHandler', {
-          auth: result.headers.authorization,
-          currentUser: result.data,
-        });
-
         await this.$router.push('/');
       } else {
         await this.loginFailHandler();
@@ -117,6 +116,10 @@ export default {
       this.$refs.form.reset();
     },
   },
+
+  mounted() {
+    this.setTabs();
+  }
 }
 </script>
 

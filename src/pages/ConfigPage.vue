@@ -43,6 +43,7 @@ export default {
   name: "ConfigPage",
   data() {
     return {
+      tabs: [],
       selectedColor: "",
       colors: [
         "파랑색", "초록색", "보라색", "주황색", "빨간색", "분홍색", "청록색", "검정색"
@@ -51,9 +52,13 @@ export default {
 
     };
   },
+
   methods: {
     setColor() {
       this.$store.commit('setColor', this.selectedColor);
+    },
+    setTabs() {
+      this.$store.commit("setTabs", this.tabs);
     },
     saveBtnHandler() {
       if (this.selectedColor !== '') {
@@ -64,7 +69,12 @@ export default {
       setTimeout(() => this.alertState = false, 1000);
     }
   },
+
   components: {AlertBox},
+
+  mounted() {
+    this.setTabs();
+  }
 }
 </script>
 

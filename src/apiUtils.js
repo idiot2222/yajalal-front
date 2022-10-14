@@ -2,10 +2,9 @@ import axios from "axios";
 import store from './store';
 
 const server = `http://localhost:8080`;
-const jwt = localStorage.getItem("auth");
+const jwt = () => localStorage.getItem("auth");
 
 function jwtCheck(err) {
-    console.log(1)
     if (err.response.data === "token expired") {
         console.log(err.response.data)
 
@@ -13,7 +12,7 @@ function jwtCheck(err) {
     }
 }
 
-const apiUtils =  {
+const apiUtils = {
 
     // user -----------
     join(dto) {
@@ -24,6 +23,15 @@ const apiUtils =  {
     login(dto) {
         return axios
             .post(`${server}/account/login`, dto)
+            .then(res => {
+                localStorage.setItem('auth', res.headers.authorization);
+
+                store.commit('loginSuccessHandler', {
+                    currentUser: res.data,
+                });
+
+                return res;
+            })
             .catch(err => err);
     },
     logout() {
@@ -36,7 +44,7 @@ const apiUtils =  {
         return axios
             .get(`${server}/account/info/${id}`, {
                 headers: {
-                    'Authorization': jwt
+                    'Authorization': jwt()
                 }
             })
             .then(res => res.data)
@@ -49,7 +57,7 @@ const apiUtils =  {
         return axios
             .post(`${server}/account/update/${id}`, dto, {
                 headers: {
-                    'Authorization': jwt
+                    'Authorization': jwt()
                 }
             })
             .catch(err => {
@@ -63,7 +71,7 @@ const apiUtils =  {
         return axios
             .post(`${server}/player/create/${userId}`, dto, {
                 headers: {
-                    'Authorization': jwt
+                    'Authorization': jwt()
                 }
             })
             .then(res => res)
@@ -72,11 +80,23 @@ const apiUtils =  {
                 console.log(err)
             });
     },
+    getPlayerId(userId) {
+        return axios
+            .get(`${server}/player/playerId/${userId}`, {
+                headers: {
+                    'Authorization': jwt()
+                }
+            })
+            .catch(err => {
+                jwtCheck(err);
+                return err;
+            });
+    },
     getPlayerInfo(userId) {
         return axios
             .get(`${server}/player/info/${userId}`, {
                 headers: {
-                    'Authorization': jwt
+                    'Authorization': jwt()
                 }
             })
             .then(res => res)
@@ -89,7 +109,7 @@ const apiUtils =  {
         return axios
             .get(`${server}/player/allInfo/${userId}`, {
                 headers: {
-                    'Authorization': jwt
+                    'Authorization': jwt()
                 }
             })
             .then(res => res)
@@ -99,11 +119,10 @@ const apiUtils =  {
             });
     },
     updatePlayerInfo(userId, dto) {
-        console.log(dto)
         return axios
             .post(`${server}/player/update/${userId}`, dto, {
                 headers: {
-                    'Authorization': jwt
+                    'Authorization': jwt()
                 }
             })
             .then(res => res)
@@ -112,6 +131,47 @@ const apiUtils =  {
                 return err.response
             });
     },
+
+    // team
+    getTeamDashBoardBattingByPlayerId(playerId) {
+        return axios
+            .get(`${server}/team/dashboard/batting/${playerId}`, {
+                headers: {
+                    'Authorization': jwt()
+                }
+            })
+            .then(res => res.data.content)
+            .catch(err => {
+                jwtCheck(err);
+                return err.response
+            });
+    },
+    getTeamDashBoardPitchingByPlayerId(playerId) {
+        return axios
+            .get(`${server}/team/dashboard/pitching/${playerId}`, {
+                headers: {
+                    'Authorization': jwt()
+                }
+            })
+            .then(res => res.data.content)
+            .catch(err => {
+                jwtCheck(err);
+                return err.response
+            });
+    },
+    getTeamNameById(playerId) {
+        return axios
+            .get(`${server}/team/teamName/${playerId}`, {
+                headers: {
+                    'Authorization': jwt()
+                }
+            })
+            .then(res => res.data)
+            .catch(err => {
+                jwtCheck(err);
+                return err.response
+            });
+    }
 }
 
 export default apiUtils;

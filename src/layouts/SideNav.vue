@@ -66,31 +66,97 @@
           >
             <v-list-item link to="/my-page">
               <v-list-item-icon>
-                <v-icon></v-icon>
+                <v-icon>mdi-vector-point</v-icon>
               </v-list-item-icon>
               <v-list-item-title>내 정보</v-list-item-title>
             </v-list-item>
             <v-list-item link to="/player-info">
               <v-list-item-icon>
-                <v-icon></v-icon>
+                <v-icon>mdi-vector-point</v-icon>
               </v-list-item-icon>
               <v-list-item-title>선수 정보</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
         </v-list-group>
 
-        <v-list-item link to="team">
-          <v-list-item-icon>
-            <v-icon>mdi-account-multiple</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>팀 페이지</v-list-item-title>
-        </v-list-item>
-        <v-list-item link to="league">
-          <v-list-item-icon>
-            <v-icon>mdi-trophy-variant</v-icon>
-          </v-list-item-icon>
-          <v-list-item-title>리그 페이지</v-list-item-title>
-        </v-list-item>
+
+        <v-list-group
+            link
+            to="user"
+            :color="subColor"
+            :value="false"
+        >
+          <template v-slot:activator>
+            <v-list-item-icon>
+              <v-icon>mdi-account-multiple</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>팀 페이지</v-list-item-title>
+          </template>
+
+          <v-list-item-group
+              :color="subColor"
+          >
+            <v-list-item link to="/team">
+              <v-list-item-icon>
+                <v-icon>mdi-vector-point</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>탐색</v-list-item-title>
+            </v-list-item>
+            <v-list-item
+                link to="/myteam-home"
+                v-if="currentUsername"
+            >
+              <v-list-item-icon>
+                <v-icon>mdi-vector-point</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>우리 팀 대시보드</v-list-item-title>
+            </v-list-item>
+            <v-list-item
+                link to="/myteam-info"
+                v-if="currentUsername"
+            >
+              <v-list-item-icon>
+                <v-icon>mdi-vector-point</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>우리 팀 상세정보</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list-group>
+
+        <v-list-group
+            link
+            to="user"
+            :color="subColor"
+            :value="false"
+        >
+          <template v-slot:activator>
+            <v-list-item-icon>
+              <v-icon>mdi-trophy-variant</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>리그 페이지</v-list-item-title>
+          </template>
+
+          <v-list-item-group
+              :color="subColor"
+          >
+            <v-list-item link to="/league">
+              <v-list-item-icon>
+                <v-icon>mdi-vector-point</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>탐색</v-list-item-title>
+            </v-list-item>
+            <v-list-item
+                link to="/league-info"
+                v-if="currentUsername"
+            >
+              <v-list-item-icon>
+                <v-icon>mdi-vector-point</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>우리 팀 정보</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list-group>
+
         <v-list-item link to="config">
           <v-list-item-icon>
             <v-icon>mdi-cog</v-icon>

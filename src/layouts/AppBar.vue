@@ -7,6 +7,15 @@
     <div class="d-flex align-center ps-5">
       <h1>Yajalal</h1>
     </div>
+    <v-tabs>
+      <v-tab
+          v-for="(tab, n) in tabs"
+          :key="n"
+          :to="tab[1]"
+      >
+        {{ tab[0] }}
+      </v-tab>
+    </v-tabs>
 
     <v-spacer></v-spacer>
 
@@ -58,6 +67,7 @@ export default {
       mainColor: state => state.mainColor,
       subColor: state => state.subColor,
       currentUserId: state => state.currentUserId,
+      tabs: state => state.tabs,
     }),
   },
 }
