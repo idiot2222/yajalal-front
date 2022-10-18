@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TeamInfoTitle>{팀 이름} 페이지</TeamInfoTitle>
+    <TabTitle>{팀 이름} 페이지</TabTitle>
     <v-row>
       <RankingBox
           title="타율"
@@ -34,7 +34,7 @@
 
 <script>
 import RankingBox from "@/components/RankingBox";
-import TeamInfoTitle from "@/components/TeamInfoTitle";
+import TabTitle from "@/components/TabTitle";
 
 export default {
   name: "MyTeamPage",
@@ -54,7 +54,7 @@ export default {
     },
   },
 
-  components: {TeamInfoTitle, RankingBox},
+  components: {TabTitle, RankingBox},
 
   mounted() {
     this.setTabs();

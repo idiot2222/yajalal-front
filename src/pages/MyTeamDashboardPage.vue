@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TeamInfoTitle>{{ teamName }} 대시보드</TeamInfoTitle>
+    <TabTitle>{{ teamName }} 대시보드</TabTitle>
     <v-row
         class="mx-4"
     >
@@ -47,7 +47,7 @@
 
 <script>
 import RankingBox from "@/components/RankingBox";
-import TeamInfoTitle from "@/components/TeamInfoTitle";
+import TabTitle from "@/components/TabTitle";
 import apiUtils from "@/apiUtils";
 import {mapState} from "vuex";
 import NoticeBoard from "@/components/NoticeBoard";
@@ -94,7 +94,7 @@ export default {
     },
   },
 
-  components: {NoticeBoard, TeamInfoTitle, RankingBox},
+  components: {NoticeBoard, TabTitle, RankingBox},
 
   mounted() {
     this.setTabs();

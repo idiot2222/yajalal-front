@@ -146,7 +146,7 @@
               <v-list-item-title>탐색</v-list-item-title>
             </v-list-item>
             <v-list-item
-                link to="/league-info"
+                link to="/my-league"
                 v-if="currentUsername"
             >
               <v-list-item-icon>

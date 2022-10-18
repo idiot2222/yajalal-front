@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "TeamInfoTitle",
+  name: "TabTitle",
   data() {
     return {
 
