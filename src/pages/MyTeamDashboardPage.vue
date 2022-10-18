@@ -1,21 +1,46 @@
 <template>
   <div>
-    <TeamInfoTitle>{{ teamName }} 페이지</TeamInfoTitle>
-    <v-row>
-      <RankingBox
-          v-for="(item, n) in batting"
-          :key="n"
-          :item="item"
-          :isBatting="true"
-      />
-    </v-row>
-    <v-row>
-      <RankingBox
-          v-for="(item, n) in pitching"
-          :key="n"
-          :item="item"
-          :isBatting="false"
-      />
+    <TeamInfoTitle>{{ teamName }} 대시보드</TeamInfoTitle>
+    <v-row
+        class="mx-4"
+    >
+      <v-col>
+<!--        batting stat-->
+        <v-row>
+          <v-col
+              v-for="(item, n) in batting"
+              :key="n"
+          >
+            <RankingBox
+                :item="item"
+                :isBatting="true"
+            />
+          </v-col>
+        </v-row>
+<!--        pitching stat-->
+        <v-row>
+          <v-col
+              v-for="(item, n) in pitching"
+              :key="n"
+          >
+            <RankingBox
+                :item="item"
+                :isBatting="false"
+            />
+          </v-col>
+        </v-row>
+      </v-col>
+
+      <v-col
+          cols="3"
+      >
+        <v-row>
+          <NoticeBoard />
+        </v-row>
+        <v-row>
+          <NoticeBoard />
+        </v-row>
+      </v-col>
     </v-row>
   </div>
 </template>
@@ -25,15 +50,16 @@ import RankingBox from "@/components/RankingBox";
 import TeamInfoTitle from "@/components/TeamInfoTitle";
 import apiUtils from "@/apiUtils";
 import {mapState} from "vuex";
+import NoticeBoard from "@/components/NoticeBoard";
 
 export default {
-  name: "MyTeamHomePage",
+  name: "MyTeamDashboardPage",
 
   data() {
     return {
       tabs: [
-        ["home", "/myteam-home"],
-        ["info", "/myteam-info"]
+        ["dashboard", "/myteam-dashboard"],
+        ["home", "/myteam-home"]
       ],
       batting: [],
       pitching: [],
@@ -68,7 +94,7 @@ export default {
     },
   },
 
-  components: {TeamInfoTitle, RankingBox},
+  components: {NoticeBoard, TeamInfoTitle, RankingBox},
 
   mounted() {
     this.setTabs();

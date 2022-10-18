@@ -10,8 +10,8 @@ import UserInfoPage from "@/pages/UserInfoPage";
 import PlayerInfoPage from "@/pages/PlayerInfoPage";
 import PlayerCreatePage from "@/pages/PlayerCreatePage";
 import PlayerModifyPage from "@/pages/PlayerModifyPage";
-import MyTeamHomePage from "@/pages/MyTeamHomePage";
-import MyTeamInfoPage from "@/pages/MyTeamInfoPage";
+import MyTeamDashboardPage from "@/pages/MyTeamDashboardPage";
+import MyTeamPage from "@/pages/MyTeamPage";
 
 Vue.use(VueRouter);
 
@@ -28,8 +28,8 @@ export const router = new VueRouter({
         {path: "/player-modify", component: PlayerModifyPage},
 
         {path: "/team", component: TeamPage},
-        {path: "/myteam-home", component: MyTeamHomePage},
-        {path: "/myteam-info", component: MyTeamInfoPage},
+        {path: "/myteam-dashboard", component: MyTeamDashboardPage},
+        {path: "/myteam-home", component: MyTeamPage},
 
         {path: "/league", component: LeaguePage},
         {path: "/config", component: ConfigPage},

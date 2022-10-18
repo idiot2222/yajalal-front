@@ -1,8 +1,5 @@
 <template>
-<v-card
-    class="ma-2"
-    width="200px"
->
+<v-card>
   <v-card-title class="title">{{ title }}</v-card-title>
   <RankingLine
       v-for="(item, n) in item.stats"

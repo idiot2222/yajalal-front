@@ -37,13 +37,13 @@ import RankingBox from "@/components/RankingBox";
 import TeamInfoTitle from "@/components/TeamInfoTitle";
 
 export default {
-  name: "MyTeamInfoPage",
+  name: "MyTeamPage",
 
   data() {
     return {
       tabs: [
-        ["home", "/myteam-home"],
-        ["info", "/myteam-info"]
+        ["dashboard", "/myteam-dashboard"],
+        ["home", "/myteam-home"]
       ]
     }
   },

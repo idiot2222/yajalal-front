@@ -103,7 +103,7 @@
               <v-list-item-title>탐색</v-list-item-title>
             </v-list-item>
             <v-list-item
-                link to="/myteam-home"
+                link to="/myteam-dashboard"
                 v-if="currentUsername"
             >
               <v-list-item-icon>
@@ -112,7 +112,7 @@
               <v-list-item-title>우리 팀 대시보드</v-list-item-title>
             </v-list-item>
             <v-list-item
-                link to="/myteam-info"
+                link to="/myteam-home"
                 v-if="currentUsername"
             >
               <v-list-item-icon>
