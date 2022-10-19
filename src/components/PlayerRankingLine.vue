@@ -1,6 +1,8 @@
 <template>
   <v-card-text>
-    <slot />
+    {{ seq }}. {{ item.playerName }}
+
+    <span class="statValue">{{ item.statValue }}</span>
   </v-card-text>
 </template>
 
@@ -16,8 +18,15 @@ export default {
   },
   components: {
   },
+  props: [
+      'seq', 'item'
+  ]
 }
 </script>
 
 <style>
+
+.statValue {
+  float: right;
+}
 </style>

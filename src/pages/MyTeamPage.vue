@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import RankingBox from "@/components/RankingBox";
+import RankingBox from "@/components/PlayerRankingBox";
 import TabTitle from "@/components/TabTitle";
 
 export default {

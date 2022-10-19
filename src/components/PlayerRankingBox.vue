@@ -5,16 +5,14 @@
       v-for="(item, n) in item.stats"
       :key="n"
       class="line"
-  >
-    {{ n+1 }}. {{ item.playerName }}
-
-    <span class="statValue">{{ item.statValue }}</span>
-  </RankingLine>
+      :item="item"
+      :seq="n+1"
+  />
 </v-card>
 </template>
 
 <script>
-import RankingLine from "@/components/RankingLine";
+import RankingLine from "@/components/PlayerRankingLine";
 import {mapState} from "vuex";
 export default {
   name: "RankingBox",
@@ -64,7 +62,4 @@ export default {
   font-size: 18px;
 }
 
-.statValue {
-  float: right;
-}
 </style>

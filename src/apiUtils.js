@@ -6,9 +6,9 @@ const jwt = () => localStorage.getItem("auth");
 
 function jwtCheck(err) {
     if (err.response.data === "token expired") {
-        console.log(err.response.data)
-
         store.commit('logout');
+
+        location.reload();
     }
 }
 
@@ -167,6 +167,20 @@ const apiUtils = {
                 }
             })
             .then(res => res.data)
+            .catch(err => {
+                jwtCheck(err);
+                return err.response
+            });
+    },
+
+    // league
+    getLeagueInfo(currentPlayerId) {
+        return axios
+            .get(`${server}/league/dashboard/${currentPlayerId}`, {
+                headers: {
+                    'Authorization': jwt()
+                }
+            })
             .catch(err => {
                 jwtCheck(err);
                 return err.response
