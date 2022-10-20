@@ -7,7 +7,28 @@
       <v-col
           cols="8"
       >
-        babo
+        <v-row>
+          <v-col
+              v-for="(item, n) in batting"
+              :key="n"
+          >
+            <RankingBox
+                :item="item"
+                :isBatting="true"
+            />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col
+              v-for="(item, n) in pitching"
+              :key="n"
+          >
+            <RankingBox
+                :item="item"
+                :isBatting="false"
+            />
+          </v-col>
+        </v-row>
       </v-col>
       <v-col>
         <TeamRankingBox
@@ -23,27 +44,40 @@ import TabTitle from "@/components/TabTitle";
 import {mapState} from "vuex";
 import apiUtils from "@/apiUtils";
 import TeamRankingBox from "@/components/TeamRankingBox";
+import RankingBox from "@/components/PlayerRankingBox";
+
 export default {
   name: "MyLeaguePage",
   data() {
     return {
       leagueInfo: {},
       leagueRecords: [],
+      batting: [],
+      pitching: [],
     }
   },
   methods: {
     getLeagueInfo() {
-       apiUtils.getLeagueInfo(this.currentPlayerId)
-           .then(res => {
-             this.leagueInfo = res.data.leagueInfo;
-             this.leagueRecords = res.data.teamRecords;
-           });
+      apiUtils.getLeagueInfo(this.currentPlayerId)
+          .then(res => {
+            this.leagueInfo = res.data.leagueInfo;
+            this.leagueRecords = res.data.teamRecords;
+          });
 
-    }
+    },
+    getLeagueBattingTopPlayers() {
+      apiUtils.getLeagueBattingTopPlayersByPlayerId(this.currentPlayerId)
+          .then(res => this.batting = res.data.content);
+    },
+    getLeaguePitchingTopPlayers() {
+      apiUtils.getLeaguePitchingTopPlayersByPlayerId(this.currentPlayerId)
+          .then(res => this.pitching = res.data.content);
+    },
   },
   components: {
     TeamRankingBox,
-    TabTitle
+    TabTitle,
+    RankingBox
   },
 
   computed: {
@@ -54,6 +88,8 @@ export default {
 
   created() {
     this.getLeagueInfo();
+    this.getLeagueBattingTopPlayers();
+    this.getLeaguePitchingTopPlayers();
   }
 }
 </script>

@@ -152,7 +152,35 @@
               <v-list-item-icon>
                 <v-icon>mdi-vector-point</v-icon>
               </v-list-item-icon>
-              <v-list-item-title>우리 팀 정보</v-list-item-title>
+              <v-list-item-title>우리 리그 정보</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list-group>
+
+        <v-list-group
+            link
+            to="user"
+            :color="subColor"
+            :value="false"
+            v-if="currentUsername"
+        >
+          <template v-slot:activator>
+            <v-list-item-icon>
+              <v-icon>mdi-baseball-bat</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>매치 페이지</v-list-item-title>
+          </template>
+
+          <v-list-item-group
+              :color="subColor"
+          >
+            <v-list-item
+                link to="/match-add"
+            >
+              <v-list-item-icon>
+                <v-icon>mdi-vector-point</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>기록지 추가</v-list-item-title>
             </v-list-item>
           </v-list-item-group>
         </v-list-group>

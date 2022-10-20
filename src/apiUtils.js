@@ -185,6 +185,40 @@ const apiUtils = {
                 jwtCheck(err);
                 return err.response
             });
+    },
+    getLeagueBattingTopPlayersByPlayerId(currentPlayerId) {
+        return axios
+            .post(`${server}/player/ranking/batting/${currentPlayerId}`,
+                {
+                    count: 5,
+                    stats: ['H', 'RBI', 'R', 'HR']
+                },
+                {
+                    headers: {
+                        'Authorization': jwt()
+                    }
+                })
+            .catch(err => {
+                jwtCheck(err);
+                return err.response
+            });
+    },
+    getLeaguePitchingTopPlayersByPlayerId(currentPlayerId) {
+        return axios
+            .post(`${server}/player/ranking/pitching/${currentPlayerId}`,
+                {
+                    count: 5,
+                    stats: ['W', 'H', 'SV', 'K']
+                },
+                {
+                    headers: {
+                        'Authorization': jwt()
+                    }
+                })
+            .catch(err => {
+                jwtCheck(err);
+                return err.response
+            });
     }
 }
 

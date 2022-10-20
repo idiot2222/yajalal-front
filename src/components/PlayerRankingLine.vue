@@ -28,5 +28,6 @@ export default {
 
 .statValue {
   float: right;
+  font-weight: 450;
 }
 </style>
