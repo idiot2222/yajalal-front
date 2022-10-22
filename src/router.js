@@ -13,6 +13,7 @@ import PlayerModifyPage from "@/pages/PlayerModifyPage";
 import MyTeamDashboardPage from "@/pages/MyTeamDashboardPage";
 import MyTeamPage from "@/pages/MyTeamPage";
 import MyLeaguePage from "@/pages/MyLeaguePage";
+import MatchAddPage from "@/pages/MatchAddPage";
 
 Vue.use(VueRouter);
 
@@ -34,7 +35,11 @@ export const router = new VueRouter({
 
         {path: "/league", component: LeaguePage},
         {path: "/my-league", component: MyLeaguePage},
+
+        {path: "/match-add", component: MatchAddPage},
+
         {path: "/config", component: ConfigPage},
+
     ],
 });
 
