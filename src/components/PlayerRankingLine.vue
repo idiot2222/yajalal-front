@@ -1,6 +1,6 @@
 <template>
   <v-card-text>
-    {{ seq }}. {{ item.playerName }}
+    {{ seq }}. {{ item.playerName }} ({{ item.backNumber }})
 
     <span class="statValue">{{ item.statValue }}</span>
   </v-card-text>
