@@ -7,9 +7,10 @@
     >
       <v-col cols="11">
         <BattingStat
-            :players="players"
-            :seq="n+1"
+            :players="remainedPlayerList"
+            :seq="n"
             :batter="batters[n]"
+            ref="battingStats"
         />
       </v-col>
       <!--      버튼-->
@@ -38,7 +39,6 @@
         </v-btn>
       </v-col>
     </v-row>
-
   </div>
 </template>
 
@@ -63,13 +63,27 @@ export default {
         this.batters.splice(n, 1);
       }
     },
-    getBatters() {
-      console.log(this.batters);
-    },
   },
   components: {BattingStat},
 
   computed: {
+    remainedPlayerList() {
+      return this.$props.players.filter(
+          (val) => {
+            let len = this.batters.length;
+
+            for(let i = 0 ; i < len ; i++) {
+              const now = this.batters[i];
+
+              if(now.player.id === val.id) {
+                return false;
+              }
+            }
+
+            return true;
+          }
+      );
+    },
   },
 
   props: [
@@ -83,6 +97,7 @@ export default {
 
 class Batter {
   constructor() {
+    this.player = '';
     this.ab = 0;
     this.h = 0;
     this.h2 = 0;

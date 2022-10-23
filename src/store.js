@@ -16,7 +16,8 @@ const store = new Vuex.Store({
                 'currentUserId',
                 'currentUserNickname',
                 'currentUsername',
-                'currentPlayerId'
+                'currentPlayerId',
+                'currentTeamId',
             ],
             blackList: []
         }),
@@ -29,6 +30,7 @@ const store = new Vuex.Store({
         currentUserNickname: "",
         currentUsername: "",
         currentPlayerId: -1,
+        currentTeamId: -1,
         positions: ['투수', '포수', '1루수', '2루수', '3루수', '유격수', '좌익수', '중견수', '우익수'],
         positionMap: getPositionMap(),
         battingStatMap: getBattingStatMap(),
@@ -52,6 +54,11 @@ const store = new Vuex.Store({
             apiUtils.getPlayerId(key.currentUser.id)
                 .then(res => {
                     this.state.currentPlayerId = res.data
+
+                    apiUtils.getTeamId(res.data)
+                        .then(res => {
+                            this.state.currentTeamId = res.data;
+                        });
                 });
         },
         logout() {
@@ -62,6 +69,7 @@ const store = new Vuex.Store({
             this.state.currentUsername = '';
             this.state.currentUserNickname = '';
             this.state.currentPlayerId = -1;
+            this.state.currentTeamId = -1;
         },
     }
 });

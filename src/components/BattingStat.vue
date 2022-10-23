@@ -5,7 +5,7 @@
     >
       <thead>
       <tr>
-        <th>{{ seq + '번 타자' }}</th>
+        <th>{{ seq + 1 + '번 타자' }}</th>
         <th>타수</th>
         <th>단타</th>
         <th>2루타</th>
@@ -25,8 +25,11 @@
           <v-select
               dense
               placeholder="타자"
-              :items="$props.players"
-              v-model="selectedPlayer"
+              :items="batterList"
+              item-text="name"
+              item-value="id"
+              v-model="$props.batter.player"
+              return-object
           />
         </td>
         <v-tooltip top>
@@ -186,32 +189,40 @@ export default {
   name: "BattingStat",
   data() {
     return {
-      selectedPlayer: "",
       abRules: [
-          v => v >= this.minAb || `타수는 안타 + 아웃 이상입니다.`
+        v => v >= this.minAb || `타수는 안타 + 아웃 이상입니다.`
       ],
       rbiRules: [
-          v => v >= this.batter.hr || '타점은 홈런보다 적을 수 없습니다.'
+        v => v >= this.batter.hr || '타점은 홈런보다 적을 수 없습니다.'
       ],
       rRules: [
-          v => v >= this.batter.hr || '득점은 홈런보다 적을 수 없습니다.'
+        v => v >= this.batter.hr || '득점은 홈런보다 적을 수 없습니다.'
       ],
     }
   },
-  methods: {
-  },
+  methods: {},
 
   components: {},
 
   computed: {
     minAb() {
       return parseInt(this.batter.h) + parseInt(this.batter.h2) + parseInt(this.batter.h3) + parseInt(this.batter.hr) + parseInt(this.batter.k);
+    },
+    batterList() {
+      const temp = this.$props.players.slice();
+
+      if (this.$props.batter.player !== '') {
+        temp.unshift(this.$props.batter.player);
+      }
+
+      return temp;
     }
   },
 
   props: [
     'seq', 'players', 'batter'
-  ]
+  ],
+
 }
 </script>
 

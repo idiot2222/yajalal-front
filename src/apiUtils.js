@@ -129,6 +129,18 @@ const apiUtils = {
                 console.log(err);
             });
     },
+    getTeamId(playerId) {
+        return axios
+            .get(`${server}/player/teamId/${playerId}`, {
+                headers: {
+                    'Authorization': jwt()
+                }
+            })
+            .catch(err => {
+                jwtCheck(err);
+                console.log(err);
+            });
+    },
 
     // team
     getTeamDashBoardBattingByPlayerId(playerId) {
@@ -165,6 +177,18 @@ const apiUtils = {
                 }
             })
             .then(res => res.data)
+            .catch(err => {
+                jwtCheck(err);
+                console.log(err);
+            });
+    },
+    getMyTeamPlayers(teamId) {
+        return axios
+            .get(`${server}/player/playerList/${teamId}`, {
+                headers: {
+                    'Authorization': jwt()
+                }
+            })
             .catch(err => {
                 jwtCheck(err);
                 console.log(err);
@@ -217,7 +241,7 @@ const apiUtils = {
                 jwtCheck(err);
                 console.log(err);
             });
-    }
+    },
 }
 
 export default apiUtils;

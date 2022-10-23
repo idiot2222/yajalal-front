@@ -31,23 +31,39 @@
 <script>
 import TabTitle from "@/components/TabTitle";
 import BattingStatBoard from "@/components/BattingStatBoard";
+import apiUtils from "@/apiUtils";
+import {mapState} from "vuex";
 
 export default {
   name: "MatchAddPage",
   data() {
     return {
-      players: ['자이언츠1', '자이언츠2', '자이언츠3', '자이언츠4']
+      players: [],
     }
   },
   methods: {
     submit() {
       this.$refs.battingStats.getBatters();
     },
+    getPlayers() {
+      apiUtils.getMyTeamPlayers(this.currentTeamId)
+      .then(x => {
+        this.players = x.data.content
+      });
+    }
   },
   components: {
     BattingStatBoard,
     TabTitle
   },
+  computed: {
+    ...mapState({
+      currentTeamId: state => state.currentTeamId
+    })
+  },
+  created() {
+    this.getPlayers();
+  }
 }
 </script>
 
