@@ -7,8 +7,6 @@ const jwt = () => localStorage.getItem("auth");
 function jwtCheck(err) {
     if (err.response.data === "token expired") {
         store.commit('logout');
-
-        location.reload();
     }
 }
 
@@ -89,7 +87,7 @@ const apiUtils = {
             })
             .catch(err => {
                 jwtCheck(err);
-                return err;
+                console.log(err);
             });
     },
     getPlayerInfo(userId) {
@@ -102,7 +100,7 @@ const apiUtils = {
             .then(res => res)
             .catch(err => {
                 jwtCheck(err);
-                return err;
+                console.log(err);
             });
     },
     getPlayerAllInfo(userId) {
@@ -115,7 +113,7 @@ const apiUtils = {
             .then(res => res)
             .catch(err => {
                 jwtCheck(err);
-                return err.response;
+                console.log(err);
             });
     },
     updatePlayerInfo(userId, dto) {
@@ -128,7 +126,7 @@ const apiUtils = {
             .then(res => res)
             .catch(err => {
                 jwtCheck(err);
-                return err.response
+                console.log(err);
             });
     },
 
@@ -143,7 +141,7 @@ const apiUtils = {
             .then(res => res.data.content)
             .catch(err => {
                 jwtCheck(err);
-                return err.response
+                console.log(err);
             });
     },
     getTeamDashBoardPitchingByPlayerId(playerId) {
@@ -156,7 +154,7 @@ const apiUtils = {
             .then(res => res.data.content)
             .catch(err => {
                 jwtCheck(err);
-                return err.response
+                console.log(err);
             });
     },
     getTeamNameById(playerId) {
@@ -169,7 +167,7 @@ const apiUtils = {
             .then(res => res.data)
             .catch(err => {
                 jwtCheck(err);
-                return err.response
+                console.log(err);
             });
     },
 
@@ -183,7 +181,7 @@ const apiUtils = {
             })
             .catch(err => {
                 jwtCheck(err);
-                return err.response
+                console.log(err);
             });
     },
     getLeagueBattingTopPlayersByPlayerId(currentPlayerId) {
@@ -200,7 +198,7 @@ const apiUtils = {
                 })
             .catch(err => {
                 jwtCheck(err);
-                return err.response
+                console.log(err);
             });
     },
     getLeaguePitchingTopPlayersByPlayerId(currentPlayerId) {
@@ -217,7 +215,7 @@ const apiUtils = {
                 })
             .catch(err => {
                 jwtCheck(err);
-                return err.response
+                console.log(err);
             });
     }
 }

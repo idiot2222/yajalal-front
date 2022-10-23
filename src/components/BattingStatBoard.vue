@@ -69,6 +69,9 @@ export default {
   },
   components: {BattingStat},
 
+  computed: {
+  },
+
   props: [
     'players'
   ],
