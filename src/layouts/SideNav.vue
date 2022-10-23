@@ -70,7 +70,10 @@
               </v-list-item-icon>
               <v-list-item-title>내 정보</v-list-item-title>
             </v-list-item>
-            <v-list-item link to="/player-info">
+            <v-list-item
+                link to="/player-info"
+                v-if="currentUsername !== ''"
+            >
               <v-list-item-icon>
                 <v-icon>mdi-vector-point</v-icon>
               </v-list-item-icon>
