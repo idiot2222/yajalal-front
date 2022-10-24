@@ -95,7 +95,7 @@
         </v-tooltip>
         <td>
           <v-simple-checkbox
-              @click="checked('W', false)"
+              @click="check('W', false)"
               :value="isChecked('W')"
               color="blue lighten-2"
               :ripple="false"
@@ -103,7 +103,7 @@
         </td>
         <td>
           <v-simple-checkbox
-              @click="checked('L', false)"
+              @click="check('L', false)"
               :value="isChecked('L')"
               color="red lighten-2"
               :ripple="false"
@@ -112,7 +112,7 @@
         <td>
           <v-simple-checkbox
               :disabled="!isReliever(seq)"
-              @click="checked('H', isStarter(seq)||isCloser(seq))"
+              @click="check('H', isStarter(seq)||isCloser(seq))"
               :value="isChecked('H')"
               color="teal lighten-3"
               :ripple="false"
@@ -121,7 +121,7 @@
         <td>
           <v-simple-checkbox
               :disabled="disable(!isCloser(seq), 'SV')"
-              @click="checked('SV', !isCloser(seq))"
+              @click="check('SV', !isCloser(seq))"
               :value="isChecked('SV')"
               color="green lighten-2"
               :ripple="false"
@@ -131,7 +131,7 @@
           <template v-slot:activator="{ on, attrs }">
             <td>
               <v-simple-checkbox
-                  @click="checked('NO', false)"
+                  @click="check('NO', false)"
                   :value="isChecked('NO')"
                   v-on="on"
                   v-bind="attrs"
@@ -175,12 +175,30 @@ export default {
     isCloser(n) {
       return n !== 0 && n === this.$props.endSeq - 1;
     },
-    checked(val, isDisabled) {
+    check(val, isDisabled) {
       if (!isDisabled) {
         this.$props.pitcher.decision = val;
       }
+
+      if(val === 'W' || val === 'SV') {
+        this.$props.setIsWin(true);
+      }
+      else if(val === 'L') {
+        this.$props.setIsWin(false);
+      }
+
     },
     isChecked(val) {
+      const temp = this.$props.pitcher.decision;
+
+      if(this.$props.isWin && temp === 'L') {
+        this.$props.pitcher.decision = 'NO';
+      }
+      else if(!this.$props.isWin && (temp === 'W' || temp === 'SV')) {
+        this.$props.pitcher.decision = 'NO';
+      }
+
+
       return this.$props.pitcher.decision === val;
     },
     disable(b, val) {
@@ -195,7 +213,7 @@ export default {
   components: {},
 
   props: [
-    'seq', 'endSeq', 'players', 'pitcher'
+    'seq', 'endSeq', 'players', 'pitcher', 'isWin', 'setIsWin',
   ],
 
   computed: {

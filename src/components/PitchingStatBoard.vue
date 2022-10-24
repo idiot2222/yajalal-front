@@ -11,6 +11,10 @@
             :seq="n"
             :pitcher="pitcher"
             :endSeq="pitchers.length"
+            :isWin="isWin"
+            :setIsWin="setIsWin"
+            :decidedSeq="decidedSeq"
+            :setDecidedSeq="setDecidedSeq"
         />
       </v-col>
       <!--      버튼-->
@@ -56,7 +60,9 @@ export default {
     return {
       pitchers: [
         new Pitcher(),
-      ]
+      ],
+      isWin: false,
+      decidedSeq: -1,
     }
   },
   methods: {
@@ -68,6 +74,12 @@ export default {
         this.pitchers.splice(n, 1);
       }
     },
+    setIsWin(b) {
+      this.isWin = b;
+    },
+    setDecidedSeq(n) {
+      this.decidedSeq = n;
+    }
   },
   components: {PitchingStatTotal, PitchingStat},
 
