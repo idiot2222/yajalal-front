@@ -200,7 +200,10 @@ export default {
 
   computed: {
     era() {
-      console.log((this.pitcher.er * 27 / this.pitcher.ip).toFixed(3));
+      if(this.pitcher.er === 0) {
+        return this.pitcher.er.toFixed(3);
+      }
+
       return (this.pitcher.er * 27 / this.pitcher.ip).toFixed(3);
     },
 

@@ -46,7 +46,8 @@
               />
             </td>
           </template>
-          <span>사사구를 제외한 타격을 한 횟수</span>
+          <span>사사구를 제외한 타격을 한 횟수<br/>
+            희생 번트, 희생 플라이도 제외</span>
         </v-tooltip>
         <v-tooltip top>
           <template v-slot:activator="{ on, attrs }">
@@ -123,7 +124,7 @@
               />
             </td>
           </template>
-          <span>타자로써 주자를 불러들인 점수</span>
+          <span>타자로서 주자를 불러들인 점수</span>
         </v-tooltip>
         <v-tooltip top>
           <template v-slot:activator="{ on, attrs }">
@@ -140,7 +141,7 @@
               />
             </td>
           </template>
-          <span>주자로써 홈에 들어온 점수<br/>
+          <span>주자로서 홈에 들어온 점수<br/>
             홈런도 포함</span>
         </v-tooltip>
         <td>

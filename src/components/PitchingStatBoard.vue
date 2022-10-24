@@ -37,11 +37,19 @@
         </v-btn>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="11">
+        <PitchingStatTotal
+          :stats="totalPitching"
+        />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
 import PitchingStat from "@/components/PitchingStat";
+import PitchingStatTotal from "@/components/PitchingStatTotal";
 export default {
   name: "PitchingStatBoard",
   data() {
@@ -61,7 +69,7 @@ export default {
       }
     },
   },
-  components: {PitchingStat},
+  components: {PitchingStatTotal, PitchingStat},
 
   props: [
     'players'
@@ -85,6 +93,21 @@ export default {
           }
       );
     },
+    totalPitching() {
+      const total = new Pitcher();
+      const len = this.pitchers.length;
+
+      for(let i = 0 ; i < len ; i++) {
+        const now = this.pitchers[i];
+
+        total.ip += parseInt(now.ip);
+        total.k += parseInt(now.k);
+        total.bb += parseInt(now.bb);
+        total.er += parseInt(now.er);
+      }
+
+      return total;
+    }
   }
 }
 

@@ -40,7 +40,7 @@
     <v-row>
       <v-col cols="11">
         <BattingStatTotal
-            :stats="totalStats"
+            :stats="totalBatting"
         />
       </v-col>
     </v-row>
@@ -90,7 +90,7 @@ export default {
           }
       );
     },
-    totalStats() {
+    totalBatting() {
       const total = new Batter();
       const len = this.batters.length;
 
