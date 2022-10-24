@@ -55,12 +55,6 @@
       수정하기
     </v-btn>
 
-    <DialogBox
-        title="로그인 정보가 필요합니다."
-        text="로그인 해주세요."
-        :isOpened="redirectDialog"
-        redirectUrl="/login"
-    />
 
     <DialogBox
         title="수정 완료"
@@ -89,7 +83,6 @@ export default {
       passwordRules: [
         v => (!v || v.length >= 10) || '비밀번호는 10자 이상입니다.'
       ],
-      redirectDialog: false,
       successDialog: false,
     }
   },
@@ -113,11 +106,6 @@ export default {
         this.successDialog = true;
       }
     },
-    isLoggedIn() {
-      if (this.currentUserId === -1) {
-        this.redirectDialog = true;
-      }
-    }
   },
 
   async mounted() {
@@ -125,8 +113,6 @@ export default {
 
     this.userInfo = await this.getUserInfo();
     this.nickname = this.userInfo.nickname;
-
-    this.isLoggedIn();
   },
 
   components: {DialogBox},

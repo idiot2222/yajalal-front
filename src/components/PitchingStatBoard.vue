@@ -13,7 +13,7 @@
             :endSeq="pitchers.length"
         />
       </v-col>
-      <!--      ??-->
+      <!--      버튼-->
       <v-col cols="1">
         <v-btn
             v-if="n === 0"

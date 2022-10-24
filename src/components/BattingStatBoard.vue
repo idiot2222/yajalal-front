@@ -37,11 +37,19 @@
         </v-btn>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="11">
+        <BattingStatTotal
+            :stats="totalStats"
+        />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
 import BattingStat from "@/components/BattingStat";
+import BattingStatTotal from "@/components/BattingStatTotal";
 
 export default {
   name: "BattingStatBoard",
@@ -62,7 +70,7 @@ export default {
       }
     },
   },
-  components: {BattingStat},
+  components: {BattingStatTotal, BattingStat},
 
   computed: {
     remainedPlayerList() {
@@ -82,6 +90,28 @@ export default {
           }
       );
     },
+    totalStats() {
+      const total = new Batter();
+      const len = this.batters.length;
+
+      for(let i = 0 ; i < len ; i++) {
+        const now = this.batters[i];
+
+        total.ab += parseInt(now.ab);
+        total.h += parseInt(now.h);
+        total.h2 += parseInt(now.h2);
+        total.h3 += parseInt(now.h3);
+        total.hr += parseInt(now.hr);
+        total.bb += parseInt(now.bb);
+        total.rbi += parseInt(now.rbi);
+        total.r += parseInt(now.r);
+        total.sb += parseInt(now.sb);
+        total.cs += parseInt(now.cs);
+        total.k += parseInt(now.k);
+      }
+
+      return total;
+    }
   },
 
   props: [

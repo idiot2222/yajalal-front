@@ -1,5 +1,6 @@
 <template>
   <v-container>
+
     <TabTitle> 타자</TabTitle>
     <BattingStatBoard
         :players="players"

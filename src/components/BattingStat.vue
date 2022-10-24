@@ -40,7 +40,7 @@
                   placeholder="타수"
                   :min="0"
                   v-model="$props.batter.ab"
-                  :rules="abRules"
+                  :error="abRules"
                   v-bind="attrs"
                   v-on="on"
               />
@@ -188,9 +188,6 @@ export default {
   name: "BattingStat",
   data() {
     return {
-      abRules: [
-        v => v >= this.minAb || `타수는 안타 + 아웃 이상입니다.`
-      ],
       rbiRules: [
         v => v >= this.batter.hr || '타점은 홈런보다 적을 수 없습니다.'
       ],
@@ -201,17 +198,20 @@ export default {
   },
   methods: {
     formatting(n) {
-      if(n < 9) {
-        return n+1 + '번 타자';
+      if (n < 9) {
+        return n + 1 + '번 타자';
       }
 
-      return n-8 + '번째 대타';
+      return n - 8 + '번째 대타';
     }
   },
 
   components: {},
 
   computed: {
+    abRules() {
+      return this.$props.batter.ab < this.minAb;
+    },
     minAb() {
       return parseInt(this.batter.h) + parseInt(this.batter.h2) + parseInt(this.batter.h3) + parseInt(this.batter.hr) + parseInt(this.batter.k);
     },
@@ -229,7 +229,6 @@ export default {
   props: [
     'seq', 'players', 'batter'
   ],
-
 }
 </script>
 
