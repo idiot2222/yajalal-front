@@ -2,35 +2,35 @@
   <div>
     <v-divider class="mb-2"></v-divider>
     <v-row
-        v-for="(batter, n) in batters"
+        v-for="(pitcher, n) in pitchers"
         :key="n"
     >
       <v-col cols="11">
-        <BattingStat
+        <PitchingStat
             :players="remainedPlayerList"
             :seq="n"
-            :batter="batter"
-            ref="battingStats"
+            :pitcher="pitcher"
+            :endSeq="pitchers.length"
         />
       </v-col>
-      <!--      버튼-->
+      <!--      ??-->
       <v-col cols="1">
         <v-btn
-            v-if="n === 8"
+            v-if="n === 0"
             text
             icon
             color="green lighten-2"
-            @click="addBattingStat"
+            @click="addPitchingStat"
             class="center"
         >
           <v-icon>mdi-plus</v-icon>
         </v-btn>
         <v-btn
-            v-if="n >= 9"
+            v-if="n >= 1"
             text
             icon
             color="red lighten-2"
-            @click="removeBattingStat(n)"
+            @click="removePitchingStat(n)"
             class="center"
         >
           <v-icon>mdi-minus</v-icon>
@@ -41,37 +41,40 @@
 </template>
 
 <script>
-import BattingStat from "@/components/BattingStat";
-
+import PitchingStat from "@/components/PitchingStat";
 export default {
-  name: "BattingStatBoard",
+  name: "PitchingStatBoard",
   data() {
     return {
-      batters: [new Batter(), new Batter(), new Batter(), new Batter(), new Batter(), new Batter(), new Batter(), new Batter(), new Batter()],
-      seq: -1,
+      pitchers: [
+        new Pitcher(),
+      ]
     }
   },
-
   methods: {
-    addBattingStat() {
-      this.batters.push(new Batter());
+    addPitchingStat() {
+      this.pitchers.push(new Pitcher());
     },
-    removeBattingStat(n) {
-      if (this.batters.length !== 9) {
-        this.batters.splice(n, 1);
+    removePitchingStat(n) {
+      if (this.pitchers.length !== 1) {
+        this.pitchers.splice(n, 1);
       }
     },
   },
-  components: {BattingStat},
+  components: {PitchingStat},
+
+  props: [
+    'players'
+  ],
 
   computed: {
     remainedPlayerList() {
       return this.$props.players.filter(
           (val) => {
-            let len = this.batters.length;
+            let len = this.pitchers.length;
 
             for(let i = 0 ; i < len ; i++) {
-              const now = this.batters[i];
+              const now = this.pitchers[i];
 
               if(now.player.id === val.id) {
                 return false;
@@ -82,36 +85,20 @@ export default {
           }
       );
     },
-  },
-
-  props: [
-    'players'
-  ],
-
+  }
 }
 
-class Batter {
+class Pitcher {
   constructor() {
     this.player = '';
-    this.ab = 0;
-    this.h = 0;
-    this.h2 = 0;
-    this.h3 = 0;
-    this.hr = 0;
-    this.bb = 0;
-    this.rbi = 0;
-    this.r = 0;
-    this.sb = 0;
-    this.cs = 0;
+    this.ip = 0;
     this.k = 0;
+    this.bb = 0;
+    this.er = 0;
+    this.decision = 'NO';
   }
 }
 </script>
 
 <style>
-.center {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 </style>

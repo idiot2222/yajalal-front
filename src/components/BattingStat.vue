@@ -27,7 +27,6 @@
               placeholder="타자"
               :items="batterList"
               item-text="name"
-              item-value="id"
               v-model="$props.batter.player"
               return-object
           />
