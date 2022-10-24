@@ -187,6 +187,9 @@ export default {
         this.$props.setIsWin(false);
       }
 
+      if(val === 'W' || val === 'L') {
+        this.$props.setDecidedSeq(this.$props.seq);
+      }
     },
     isChecked(val) {
       const temp = this.$props.pitcher.decision;
@@ -198,6 +201,9 @@ export default {
         this.$props.pitcher.decision = 'NO';
       }
 
+      if((temp === 'W' || temp === 'L') && this.$props.decidedSeq !== this.$props.seq) {
+        this.$props.pitcher.decision = 'NO';
+      }
 
       return this.$props.pitcher.decision === val;
     },
@@ -213,7 +219,7 @@ export default {
   components: {},
 
   props: [
-    'seq', 'endSeq', 'players', 'pitcher', 'isWin', 'setIsWin',
+    'seq', 'endSeq', 'players', 'pitcher', 'isWin', 'setIsWin', 'decidedSeq', 'setDecidedSeq'
   ],
 
   computed: {
