@@ -14,9 +14,7 @@
         />
       </v-col>
       <!--      버튼-->
-      <v-col
-          cols="1"
-      >
+      <v-col cols="1">
         <v-btn
             v-if="n === 8"
             text

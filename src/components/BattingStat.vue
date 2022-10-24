@@ -5,7 +5,7 @@
     >
       <thead>
       <tr>
-        <th>{{ seq + 1 + '번 타자' }}</th>
+        <th>{{ formatting(seq) }}</th>
         <th>타수</th>
         <th>단타</th>
         <th>2루타</th>
@@ -200,7 +200,15 @@ export default {
       ],
     }
   },
-  methods: {},
+  methods: {
+    formatting(n) {
+      if(n < 9) {
+        return n+1 + '번 타자';
+      }
+
+      return n-8 + '번째 대타';
+    }
+  },
 
   components: {},
 
