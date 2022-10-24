@@ -4,6 +4,7 @@
       <thead>
       <tr>
         <th>{{ formatting(seq) }}</th>
+        <th>평균자책점</th>
         <th>이닝</th>
         <th>탈삼진</th>
         <th>사사구</th>
@@ -18,16 +19,18 @@
       <tbody>
       <tr>
         <td>
-        <v-select
-            dense
-            :items="pitcherList"
-            item-text="name"
-            placeholder="투수"
-            v-model="$props.pitcher.player"
-            return-object
-        >
-
-        </v-select>
+          <v-select
+              dense
+              :items="pitcherList"
+              item-text="name"
+              placeholder="투수"
+              v-model="$props.pitcher.player"
+              return-object
+          >
+          </v-select>
+        </td>
+        <td>
+          {{ era }}
         </td>
         <v-tooltip top>
           <template v-slot:activator="{ on, attrs }">
@@ -173,7 +176,7 @@ export default {
       return n !== 0 && n === this.$props.endSeq - 1;
     },
     checked(val, isDisabled) {
-      if(!isDisabled) {
+      if (!isDisabled) {
         this.$props.pitcher.decision = val;
       }
     },
@@ -181,7 +184,7 @@ export default {
       return this.$props.pitcher.decision === val;
     },
     disable(b, val) {
-      if(b && this.$props.pitcher.decision === val) {
+      if (b && this.$props.pitcher.decision === val) {
         this.$props.pitcher.decision = 'NO';
       }
 
@@ -196,6 +199,11 @@ export default {
   ],
 
   computed: {
+    era() {
+      console.log((this.pitcher.er * 27 / this.pitcher.ip).toFixed(3));
+      return (this.pitcher.er * 27 / this.pitcher.ip).toFixed(3);
+    },
+
     inningInput: {
       get() {
         if (this.isInputActive) {
@@ -212,7 +220,7 @@ export default {
         }
       },
       set(newValue) {
-        if(newValue >= 0) {
+        if (newValue >= 0) {
           this.$props.pitcher.ip = newValue;
         }
       }
