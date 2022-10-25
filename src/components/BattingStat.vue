@@ -2,10 +2,11 @@
   <v-card>
     <v-simple-table
         dense
+        style="table-layout: fixed"
     >
       <thead>
       <tr>
-        <th>{{ formatting(seq) }}</th>
+        <th style="width: 20%">{{ formatting(seq) }}</th>
         <th>타수</th>
         <th>단타</th>
         <th>2루타</th>
@@ -26,10 +27,16 @@
               dense
               placeholder="타자"
               :items="batterList"
-              item-text="name"
               v-model="$props.batter.player"
               return-object
-          />
+          >
+            <template v-slot:item="{ item }">
+              {{ item.name + `(${item.backNumber})` }}
+            </template>
+            <template v-slot:selection="{ item }">
+              {{ item.name + `(${item.backNumber})` }}
+            </template>
+          </v-select>
         </td>
         <v-tooltip top>
           <template v-slot:activator="{ on, attrs }">
@@ -40,7 +47,7 @@
                   placeholder="타수"
                   :min="0"
                   v-model="$props.batter.ab"
-                  :error="abRules"
+                  :error-messages="abRules"
                   v-bind="attrs"
                   v-on="on"
               />
@@ -118,7 +125,7 @@
                   placeholder="타점"
                   v-model="$props.batter.rbi"
                   :min="0"
-                  :rules="rbiRules"
+                  :error-messages="rbiRules"
                   v-bind="attrs"
                   v-on="on"
               />
@@ -135,7 +142,7 @@
                   placeholder="득점"
                   v-model="$props.batter.r"
                   :min="0"
-                  :rules="rRules"
+                  :error-messages="rRules"
                   v-bind="attrs"
                   v-on="on"
               />
@@ -189,12 +196,7 @@ export default {
   name: "BattingStat",
   data() {
     return {
-      rbiRules: [
-        v => v >= this.batter.hr || '타점은 홈런보다 적을 수 없습니다.'
-      ],
-      rRules: [
-        v => v >= this.batter.hr || '득점은 홈런보다 적을 수 없습니다.'
-      ],
+
     }
   },
   methods: {
@@ -211,7 +213,13 @@ export default {
 
   computed: {
     abRules() {
-      return this.$props.batter.ab < this.minAb;
+      return this.$props.batter.ab < this.minAb ? '타수는 모든 안타의 합보다 적을 수 없습니다' : '';
+    },
+    rbiRules() {
+      return this.batter.rbi < this.batter.hr ? '타점은 홈런보다 적을 수 없습니다' : '';
+    },
+    rRules() {
+      return this.batter.r < this.batter.hr ? '득점은 홈런보다 적을 수 없습니다' : '';
     },
     minAb() {
       return parseInt(this.batter.h) + parseInt(this.batter.h2) + parseInt(this.batter.h3) + parseInt(this.batter.hr) + parseInt(this.batter.k);

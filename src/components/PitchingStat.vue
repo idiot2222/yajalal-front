@@ -1,10 +1,13 @@
 <template>
   <v-card>
-    <v-simple-table dense>
+    <v-simple-table
+        dense
+        style="table-layout: fixed"
+    >
       <thead>
       <tr>
-        <th>{{ formatting(seq) }}</th>
-        <th>평균자책점</th>
+        <th style="width: 20%">{{ formatting(seq) }}</th>
+        <th style="width: 8%">평균자책점</th>
         <th>이닝</th>
         <th>탈삼진</th>
         <th>사사구</th>
@@ -27,6 +30,12 @@
               v-model="$props.pitcher.player"
               return-object
           >
+            <template v-slot:item="{ item }">
+              {{ item.name + `(${item.backNumber})` }}
+            </template>
+            <template v-slot:selection="{ item }">
+              {{ item.name + `(${item.backNumber})` }}
+            </template>
           </v-select>
         </td>
         <td>
@@ -93,22 +102,36 @@
           </template>
           <span>본인 책임 주자의 실점</span>
         </v-tooltip>
-        <td>
-          <v-simple-checkbox
-              @click="check('W', false)"
-              :value="isChecked('W')"
-              color="blue lighten-2"
-              :ripple="false"
-          />
-        </td>
-        <td>
-          <v-simple-checkbox
-              @click="check('L', false)"
-              :value="isChecked('L')"
-              color="red lighten-2"
-              :ripple="false"
-          />
-        </td>
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <td>
+              <v-simple-checkbox
+                  @click="check('W', false)"
+                  :value="isChecked('W')"
+                  color="blue lighten-2"
+                  :ripple="false"
+                  v-bind="attrs"
+                  v-on="on"
+              />
+            </td>
+          </template>
+          <span>체크 시에 다른 선수들의 패배 체크가 지워집니다.</span>
+        </v-tooltip>
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <td>
+              <v-simple-checkbox
+                  @click="check('L', false)"
+                  :value="isChecked('L')"
+                  color="red lighten-2"
+                  :ripple="false"
+                  v-bind="attrs"
+                  v-on="on"
+              />
+            </td>
+          </template>
+          <span>체크 시에 다른 선수의 승리, 세이브 체크가 지워집니다.</span>
+        </v-tooltip>
         <td>
           <v-simple-checkbox
               :disabled="!isReliever(seq)"
@@ -118,15 +141,22 @@
               :ripple="false"
           />
         </td>
-        <td>
-          <v-simple-checkbox
-              :disabled="disable(!isCloser(seq), 'SV')"
-              @click="check('SV', !isCloser(seq))"
-              :value="isChecked('SV')"
-              color="green lighten-2"
-              :ripple="false"
-          />
-        </td>
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <td>
+              <v-simple-checkbox
+                  :disabled="disable(!isCloser(seq), 'SV')"
+                  @click="check('SV', !isCloser(seq))"
+                  :value="isChecked('SV')"
+                  color="green lighten-2"
+                  :ripple="false"
+                  v-bind="attrs"
+                  v-on="on"
+              />
+            </td>
+          </template>
+          <span>체크 시에 다른 선수들의 패배 체크가 지워집니다.</span>
+        </v-tooltip>
         <v-tooltip top>
           <template v-slot:activator="{ on, attrs }">
             <td>
@@ -225,10 +255,16 @@ export default {
   computed: {
     era() {
       if(this.pitcher.er === 0) {
-        return this.pitcher.er.toFixed(3);
+        if(this.pitcher.ip === 0) {
+          return this.pitcher.er.toFixed(2);
+        }
+
+        return this.pitcher.er.toFixed(2);
       }
 
-      return (this.pitcher.er * 27 / this.pitcher.ip).toFixed(3);
+      let temp = (this.pitcher.er * 27 / this.pitcher.ip).toFixed(2);
+
+      return temp > 99.99 ? 99.99 : temp;
     },
 
     inningInput: {
