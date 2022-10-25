@@ -254,18 +254,18 @@ export default {
 
   computed: {
     era() {
-      if(this.pitcher.er === 0) {
-        if(this.pitcher.ip === 0) {
-          return this.pitcher.er.toFixed(2);
-        }
-
-        return this.pitcher.er.toFixed(2);
-      }
-
       let temp = (this.pitcher.er * 27 / this.pitcher.ip).toFixed(2);
 
-      return temp > 99.99 ? 99.99 : temp;
+      if(temp > 99.99) {
+        return 99.99;
+      }
+      else if(isNaN(temp)) {
+        return Number(0).toFixed(2);
+      }
+
+      return temp;
     },
+
 
     inningInput: {
       get() {

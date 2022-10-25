@@ -41,11 +41,16 @@ export default {
 
   computed: {
     era() {
-      if(this.stats.er === 0) {
-        return this.stats.er.toFixed(3);
+      let temp = (this.stats.er * 27 / this.stats.ip).toFixed(2);
+
+      if(temp > 99.99) {
+        return 99.99;
+      }
+      else if(isNaN(temp)) {
+        return Number(0).toFixed(2);
       }
 
-      return (this.stats.er * 27 / this.stats.ip).toFixed(3);
+      return temp;
     },
 
     inningInput: {
