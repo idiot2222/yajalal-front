@@ -58,7 +58,6 @@ export default {
 
   data() {
     return {
-      tabs: [],
       valid: true,
       username: '',
       usernameRules: [
@@ -78,9 +77,6 @@ export default {
   },
 
   methods: {
-    setTabs() {
-      this.$store.commit("setTabs", this.tabs);
-    },
     login() {
       if (!this.$refs.form.validate()) {
         return;
@@ -117,9 +113,6 @@ export default {
     },
   },
 
-  mounted() {
-    this.setTabs();
-  }
 }
 </script>
 

@@ -76,7 +76,6 @@ export default {
 
   data() {
     return {
-      tabs: [],
       nickname: "",
       userInfo: {},
       password: "",
@@ -88,9 +87,6 @@ export default {
   },
 
   methods: {
-    setTabs() {
-      this.$store.commit("setTabs", this.tabs);
-    },
     async getUserInfo() {
       return await apiUtils.getUserInfo(this.currentUserId) || {};
     },
@@ -109,8 +105,6 @@ export default {
   },
 
   async mounted() {
-    this.setTabs();
-
     this.userInfo = await this.getUserInfo();
     this.nickname = this.userInfo.nickname;
   },

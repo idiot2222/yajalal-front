@@ -57,10 +57,6 @@ export default {
 
   data() {
     return {
-      tabs: [
-        ["dashboard", "/myteam-dashboard"],
-        ["home", "/myteam-home"]
-      ],
       batting: [],
       pitching: [],
       teamName: "",
@@ -68,9 +64,6 @@ export default {
   },
 
   methods: {
-    setTabs() {
-      this.$store.commit("setTabs", this.tabs);
-    },
     async setStatBoard() {
       this.batting = await apiUtils.getTeamDashBoardBattingByPlayerId(this.currentPlayerId);
       this.pitching = await apiUtils.getTeamDashBoardPitchingByPlayerId(this.currentPlayerId);
@@ -97,8 +90,6 @@ export default {
   components: {NoticeBoard, TabTitle, RankingBox},
 
   mounted() {
-    this.setTabs();
-
     this.getTeamName();
     this.setStatBoard();
   },

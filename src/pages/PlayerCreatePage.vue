@@ -120,7 +120,6 @@ export default {
 
   data() {
     return {
-      tabs: [],
       valid: true,
       name: "",
       nameRules: [
@@ -151,9 +150,6 @@ export default {
   },
 
   methods: {
-    setTabs() {
-      this.$store.commit("setTabs", this.tabs);
-    },
     reset() {
       this.$refs.form.reset()
     },
@@ -203,10 +199,6 @@ export default {
       positionMap: state => state.positionMap,
     })
   },
-
-  mounted() {
-    this.setTabs();
-  }
 }
 </script>
 

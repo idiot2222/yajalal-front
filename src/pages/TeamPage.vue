@@ -11,22 +11,14 @@ export default {
 
   data() {
     return {
-      tabs: [],
-      tab: null,
     }
   },
 
   methods: {
-    setTabs() {
-      this.$store.commit("setTabs", this.tabs);
-    },
   },
 
   components: {},
 
-  mounted() {
-    this.setTabs();
-  }
 }
 </script>
 

@@ -41,26 +41,14 @@ export default {
 
   data() {
     return {
-      tabs: [
-        ["dashboard", "/myteam-dashboard"],
-        ["home", "/myteam-home"]
-      ]
     }
   },
 
   methods: {
-    setTabs() {
-      this.$store.commit("setTabs", this.tabs);
-    },
   },
 
   components: {TabTitle, RankingBox},
 
-  mounted() {
-    this.setTabs();
-
-
-  }
 }
 </script>
 
