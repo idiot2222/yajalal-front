@@ -90,14 +90,15 @@ export default {
       this.loginHandler(dto);
     },
 
-    async loginHandler(dto) {
-      const result = await apiUtils.login(dto);
-
-      if (result.status === 200) {
-        await this.$router.push('/');
-      } else {
-        await this.loginFailHandler();
-      }
+    loginHandler(dto) {
+      apiUtils.login(dto)
+        .then(res => {
+          if (res === "ok") {
+            this.$router.push('/');
+          } else {
+            this.loginFailHandler();
+          }
+        });
     },
 
     async loginFailHandler() {

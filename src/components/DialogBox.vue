@@ -19,7 +19,7 @@
           <v-btn
               text
               @click="redirectHandler(dialog)"
-          >닫기
+          >확인
           </v-btn>
         </v-card-actions>
       </v-card>
