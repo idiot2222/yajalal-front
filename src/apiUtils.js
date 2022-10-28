@@ -30,6 +30,23 @@ const apiUtils = {
 
                 return res;
             })
+            .then(res => {
+                return apiUtils.getPlayerId(res.data.id)
+                    .then(res => {
+                        store.commit('setPlayerId', res.data);
+
+                        return res;
+                    })
+                    .catch(err => console.log(err));
+            })
+            .then(res => {
+                return apiUtils.getTeamId(res.data)
+                    .then(res => {
+                        store.commit('setTeamId', res.data);
+
+                        return "ok";
+                    })
+            })
             .catch(err => err);
     },
     logout() {
@@ -242,6 +259,25 @@ const apiUtils = {
                 console.log(err);
             });
     },
+
+    // match
+    createNewMatch(leagueId, batters, pitchers) {
+        return axios
+            .post(`${server}/match/create/${leagueId}`,
+                {
+                    batters,
+                    pitchers,
+                },
+                {
+                    headers: {
+                        'Authorization': jwt()
+                    }
+                })
+            .catch(err => {
+                jwtCheck(err);
+                console.log(err);
+            });
+    }
 }
 
 export default apiUtils;

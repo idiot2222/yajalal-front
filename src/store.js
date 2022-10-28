@@ -51,15 +51,6 @@ const store = new Vuex.Store({
             this.state.currentUserId = key.currentUser.id;
             this.state.currentUsername = key.currentUser.username;
             this.state.currentUserNickname = key.currentUser.nickname;
-            apiUtils.getPlayerId(key.currentUser.id)
-                .then(res => {
-                    this.state.currentPlayerId = res.data
-
-                    apiUtils.getTeamId(res.data)
-                        .then(res => {
-                            this.state.currentTeamId = res.data;
-                        });
-                });
         },
         logout() {
             apiUtils.logout();
@@ -71,6 +62,12 @@ const store = new Vuex.Store({
             this.state.currentPlayerId = -1;
             this.state.currentTeamId = -1;
         },
+        setPlayerId(state, playerId) {
+            this.state.currentPlayerId = playerId;
+        },
+        setTeamId(state, teamId) {
+            this.state.currentTeamId = teamId;
+        }
     }
 });
 

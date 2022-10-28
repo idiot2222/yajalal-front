@@ -45,8 +45,6 @@ export default {
   data() {
     return {
       players: [],
-      batters: [],
-      pitchers: [],
     }
   },
   methods: {
@@ -55,16 +53,17 @@ export default {
         return;
       }
 
-      this.batters = this.$refs.battingStats.batters;
-      this.pitchers = this.$refs.pitchingStats.pitchers;
+      const batters = this.$refs.battingStats.batters;
+      const pitchers = this.$refs.pitchingStats.pitchers;
 
-      console.log(this.batters);
-      console.log(this.pitchers);
+      const result = apiUtils.createNewMatch(0, batters, pitchers).then(res => res);
+
+      console.log(result);
     },
     getPlayers() {
       apiUtils.getMyTeamPlayers(this.currentTeamId)
-      .then(x => {
-        this.players = x.data.content
+      .then(res => {
+        this.players = res.data.content
       });
     }
   },
