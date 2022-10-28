@@ -15,6 +15,7 @@
             :setIsWin="setIsWin"
             :decidedSeq="decidedSeq"
             :setDecidedSeq="setDecidedSeq"
+            ref="stats"
         />
       </v-col>
       <!--      버튼-->
@@ -79,7 +80,7 @@ export default {
     },
     setDecidedSeq(n) {
       this.decidedSeq = n;
-    }
+    },
   },
   components: {PitchingStatTotal, PitchingStat},
 
@@ -119,7 +120,7 @@ export default {
       }
 
       return total;
-    }
+    },
   }
 }
 

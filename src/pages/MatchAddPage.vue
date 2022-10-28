@@ -17,15 +17,18 @@
 
     <v-divider class="my-2"></v-divider>
 
-    <v-row class="my-2">
+    <div
+    >
       <v-btn
+          class="ma-5"
+          style="float: right"
           depressed
           color="primary"
           @click="submit"
       >
         확인
       </v-btn>
-    </v-row>
+    </div>
 
   </v-container>
 </template>
@@ -48,6 +51,10 @@ export default {
   },
   methods: {
     submit() {
+      if(!this.$refs.battingStats.validate()) {
+        return;
+      }
+
       this.batters = this.$refs.battingStats.batters;
       this.pitchers = this.$refs.pitchingStats.pitchers;
 

@@ -10,7 +10,7 @@
             :players="remainedPlayerList"
             :seq="n"
             :batter="batter"
-            ref="battingStats"
+            ref="stats"
         />
       </v-col>
       <!--      버튼-->
@@ -69,6 +69,21 @@ export default {
         this.batters.splice(n, 1);
       }
     },
+    validate() {
+      const stats = this.$refs.stats;
+      const len = stats.length;
+      let validate = true;
+
+      for(let i = 0 ; i < len ; i++) {
+        const temp = stats[i].validate();
+
+        if(!temp) {
+          validate = false;
+        }
+      }
+
+      return validate;
+    }
   },
   components: {BattingStatTotal, BattingStat},
 
@@ -90,6 +105,7 @@ export default {
           }
       );
     },
+
     totalBatting() {
       const total = new Batter();
       const len = this.batters.length;
@@ -111,7 +127,7 @@ export default {
       }
 
       return total;
-    }
+    },
   },
 
   props: [
