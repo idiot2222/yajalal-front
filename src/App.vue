@@ -1,17 +1,17 @@
 <template>
   <v-app>
-    <AppBar />
+    <AppBar/>
 
-    <SideNav />
+    <SideNav/>
 
     <v-main>
       <DialogBox
           title="로그인 정보가 필요합니다."
           text="로그인 해주세요."
-          :isOpened="isLoggedIn"
+          :isOpened="nowNeedLogin"
           redirectUrl="/login"
       />
-      <router-view />
+      <router-view/>
     </v-main>
   </v-app>
 </template>
@@ -32,17 +32,39 @@ export default {
   },
 
   data: () => ({
-    //
+    noLoginUrls: [
+      '/', '/login', '/join', '/team', '/league', '/config'
+    ],
+    nowNeedLogin: false,
   }),
+
+  methods: {
+    isLoggedIn() {
+      this.nowNeedLogin = true;
+
+      this.noLoginUrls.forEach(e => {
+        if (window.location.pathname === e) {
+          this.nowNeedLogin = false;
+        }
+      });
+
+      if (this.nowNeedLogin) {
+        this.nowNeedLogin = this.currentUserId === -1;
+      }
+    }
+  },
 
   computed: {
     ...mapState({
       currentUserId: state => state.currentUserId,
     }),
+  },
 
-    isLoggedIn() {
-      return this.currentUserId === -1;
-    }
-  }
+  watch: {
+    '$route'() {
+      this.isLoggedIn();
+    },
+  },
+
 };
 </script>
