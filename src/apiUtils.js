@@ -225,6 +225,18 @@ const apiUtils = {
                 console.log(err);
             });
     },
+    getLeagueTeamListByTeamId(currentTeamId) {
+        return axios
+            .get(`${server}/team/leagueList/${currentTeamId}`, {
+                headers: {
+                    'Authorization': jwt()
+                }
+            })
+            .catch(err => {
+                jwtCheck(err);
+                console.log(err);
+            });
+    },
     getLeagueBattingTopPlayersByPlayerId(currentPlayerId) {
         return axios
             .post(`${server}/player/ranking/batting/${currentPlayerId}`,
@@ -261,13 +273,10 @@ const apiUtils = {
     },
 
     // match
-    createNewMatch(leagueId, batters, pitchers) {
+    createNewMatch(leagueId, payload) {
         return axios
             .post(`${server}/match/create/${leagueId}`,
-                {
-                    batters,
-                    pitchers,
-                },
+                payload,
                 {
                     headers: {
                         'Authorization': jwt()
@@ -277,7 +286,7 @@ const apiUtils = {
                 jwtCheck(err);
                 console.log(err);
             });
-    }
+    },
 }
 
 export default apiUtils;

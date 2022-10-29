@@ -222,7 +222,6 @@ export default {
     validate() {
       return this.$refs.form.validate();
     },
-
   },
 
   components: {},

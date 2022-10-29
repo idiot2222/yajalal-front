@@ -1,6 +1,13 @@
 <template>
   <v-container>
 
+    <TabTitle>경기 정보</TabTitle>
+    <MatchInfoBoard
+        ref="matchInfo"
+    />
+
+    <v-divider class="my-2"></v-divider>
+
     <TabTitle> 타자</TabTitle>
     <BattingStatBoard
         :players="players"
@@ -17,8 +24,8 @@
 
     <v-divider class="my-2"></v-divider>
 
-    <div
-    >
+
+    <div>
       <v-btn
           class="ma-5"
           style="float: right"
@@ -30,6 +37,11 @@
       </v-btn>
     </div>
 
+    <AlertBox
+        message="저장 완료"
+        :value="alertState"
+    />
+
   </v-container>
 </template>
 
@@ -39,12 +51,15 @@ import BattingStatBoard from "@/components/BattingStatBoard";
 import apiUtils from "@/apiUtils";
 import {mapState} from "vuex";
 import PitchingStatBoard from "@/components/PitchingStatBoard";
+import MatchInfoBoard from "@/components/MatchInfoBoard";
+import AlertBox from "@/components/AlertBox";
 
 export default {
   name: "MatchAddPage",
   data() {
     return {
       players: [],
+      alertState: false,
     }
   },
   methods: {
@@ -56,9 +71,29 @@ export default {
       const batters = this.$refs.battingStats.batters;
       const pitchers = this.$refs.pitchingStats.pitchers;
 
-      const result = apiUtils.createNewMatch(0, batters, pitchers).then(res => res);
+      const payload = {
+        batters,
+        pitchers,
+        myTeamId: this.currentTeamId,
+        yourTeamId: this.$refs.matchInfo.selectedTeam,
+        matchDate: this.$refs.matchInfo.date,
+      }
 
-      console.log(result);
+      apiUtils.createNewMatch(227, payload)
+          .then(res => {
+            if(res.data.message === 'ok') {
+              this.success();
+            }
+          });
+    },
+    success() {
+      this.alertState = true;
+
+      setTimeout(() => {
+        this.alertState = false
+
+        window.location.reload();
+      }, 1000);
     },
     getPlayers() {
       apiUtils.getMyTeamPlayers(this.currentTeamId)
@@ -68,6 +103,8 @@ export default {
     }
   },
   components: {
+    AlertBox,
+    MatchInfoBoard,
     PitchingStatBoard,
     BattingStatBoard,
     TabTitle
@@ -75,11 +112,12 @@ export default {
   computed: {
     ...mapState({
       currentTeamId: state => state.currentTeamId
-    })
+    }),
   },
   created() {
     this.getPlayers();
   }
+
 }
 </script>
 

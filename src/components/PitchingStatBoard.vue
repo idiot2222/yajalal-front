@@ -55,6 +55,8 @@
 <script>
 import PitchingStat from "@/components/PitchingStat";
 import PitchingStatTotal from "@/components/PitchingStatTotal";
+import {Pitcher} from "@/class";
+
 export default {
   name: "PitchingStatBoard",
   data() {
@@ -124,16 +126,6 @@ export default {
   }
 }
 
-class Pitcher {
-  constructor() {
-    this.player = '';
-    this.ip = 0;
-    this.k = 0;
-    this.bb = 0;
-    this.er = 0;
-    this.decision = 'NO';
-  }
-}
 </script>
 
 <style>

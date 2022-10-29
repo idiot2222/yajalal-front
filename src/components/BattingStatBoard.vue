@@ -50,6 +50,7 @@
 <script>
 import BattingStat from "@/components/BattingStat";
 import BattingStatTotal from "@/components/BattingStatTotal";
+import {Batter} from "@/class";
 
 export default {
   name: "BattingStatBoard",
@@ -79,6 +80,8 @@ export default {
 
         if(!temp) {
           validate = false;
+
+          break;
         }
       }
 
@@ -136,22 +139,6 @@ export default {
 
 }
 
-class Batter {
-  constructor() {
-    this.player = '';
-    this.ab = 0;
-    this.h = 0;
-    this.h2 = 0;
-    this.h3 = 0;
-    this.hr = 0;
-    this.bb = 0;
-    this.rbi = 0;
-    this.r = 0;
-    this.sb = 0;
-    this.cs = 0;
-    this.k = 0;
-  }
-}
 </script>
 
 <style>
