@@ -24,7 +24,6 @@
 
     <v-divider class="my-2"></v-divider>
 
-
     <div>
       <v-btn
           class="ma-5"
@@ -63,8 +62,23 @@ export default {
     }
   },
   methods: {
-    submit() {
+    validate() {
+      let b = true;
+
+      if(!this.$refs.matchInfo.validate()) {
+        b = false;
+      }
       if(!this.$refs.battingStats.validate()) {
+        b = false;
+      }
+      if(!this.$refs.pitchingStats.validate()) {
+        b = false;
+      }
+
+      return b;
+    },
+    submit() {
+      if(!this.validate()) {
         return;
       }
 

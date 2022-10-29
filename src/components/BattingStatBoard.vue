@@ -80,8 +80,6 @@ export default {
 
         if(!temp) {
           validate = false;
-
-          break;
         }
       }
 

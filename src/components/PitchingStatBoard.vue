@@ -83,6 +83,21 @@ export default {
     setDecidedSeq(n) {
       this.decidedSeq = n;
     },
+    validate() {
+      const stats = this.$refs.stats;
+      const len = stats.length;
+      let validate = true;
+
+      for(let i = 0 ; i < len ; i++) {
+        const temp = stats[i].validate();
+
+        if(!temp) {
+          validate = false;
+        }
+      }
+
+      return validate;
+    }
   },
   components: {PitchingStatTotal, PitchingStat},
 

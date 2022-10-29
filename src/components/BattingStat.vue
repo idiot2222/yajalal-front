@@ -30,6 +30,8 @@
                 dense
                 placeholder="타자"
                 :items="batterList"
+                item-value="id"
+                :rules="selectRules"
                 v-model="$props.batter.player"
                 return-object
             >
@@ -200,6 +202,9 @@ export default {
   name: "BattingStat",
   data() {
     return {
+      selectRules: [
+        v => !!v || '선수를 선택해주세요.'
+      ],
       abRules: [
         v => v >= this.minAb || '잘못된 타수'
       ],

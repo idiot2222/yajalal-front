@@ -26,6 +26,7 @@
             <v-select
                 dense
                 :items="pitcherList"
+                :rules="selectRules"
                 item-text="name"
                 placeholder="투수"
                 v-model="$props.pitcher.player"
@@ -181,13 +182,15 @@
 </template>
 
 <script>
-import {Pitcher} from "@/class";
 
 export default {
   name: "PitchingStat",
   data() {
     return {
       isInputActive: false,
+      selectRules: [
+        v => !!v || '선수를 선택해주세요.',
+      ]
     }
   },
   methods: {
@@ -246,6 +249,9 @@ export default {
 
       return b;
     },
+    validate() {
+      return this.$refs.form.validate();
+    }
   },
 
   components: {},
