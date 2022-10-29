@@ -1,5 +1,7 @@
 <template>
   <v-form ref="form">
+    <v-divider class="my-2"></v-divider>
+
     <v-card class="mx-12">
       <v-simple-table>
         <thead>
