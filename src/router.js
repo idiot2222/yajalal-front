@@ -14,6 +14,7 @@ import MyTeamDashboardPage from "@/pages/MyTeamDashboardPage";
 import MyTeamPage from "@/pages/MyTeamPage";
 import MyLeaguePage from "@/pages/MyLeaguePage";
 import MatchAddPage from "@/pages/MatchAddPage";
+import PlayerStatPage from "@/pages/PlayerStatPage";
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,7 @@ export const router = new VueRouter({
 
         {path: "/my-page", component: UserInfoPage},
         {path: "/player-info", component: PlayerInfoPage},
+        {path: "/player-stat", component: PlayerStatPage},
         {path: "/player-create", component: PlayerCreatePage},
         {path: "/player-modify", component: PlayerModifyPage},
 

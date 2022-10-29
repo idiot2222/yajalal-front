@@ -79,6 +79,15 @@
               </v-list-item-icon>
               <v-list-item-title>선수 정보</v-list-item-title>
             </v-list-item>
+            <v-list-item
+                link to="/player-stat"
+                v-if="currentUsername !== ''"
+            >
+              <v-list-item-icon>
+                <v-icon>mdi-vector-point</v-icon>
+              </v-list-item-icon>
+              <v-list-item-title>선수 기록</v-list-item-title>
+            </v-list-item>
           </v-list-item-group>
         </v-list-group>
 
