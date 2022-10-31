@@ -47,7 +47,7 @@
 <script>
 import TabTitle from "@/components/TabTitle";
 import BattingStatBoard from "@/components/BattingStatBoard";
-import apiUtils from "@/apiUtils";
+import apiUtils from "@/utils/apiUtils";
 import {mapState} from "vuex";
 import PitchingStatBoard from "@/components/PitchingStatBoard";
 import MatchInfoBoard from "@/components/MatchInfoBoard";

@@ -48,7 +48,7 @@
 <script>
 import RankingBox from "@/components/PlayerRankingBox";
 import TabTitle from "@/components/TabTitle";
-import apiUtils from "@/apiUtils";
+import apiUtils from "@/utils/apiUtils";
 import {mapState} from "vuex";
 import NoticeBoard from "@/components/NoticeBoard";
 
@@ -110,12 +110,4 @@ export default {
 </script>
 
 <style>
-.team-main {
-  width: 1050px;
-  height: 800px;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 </style>

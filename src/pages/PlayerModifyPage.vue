@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import apiUtils from "@/apiUtils";
+import apiUtils from "@/utils/apiUtils";
 import {mapState} from "vuex";
 
 export default {

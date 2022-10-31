@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import {calERA, formatInning} from "@/utils/statCalculator";
+
 export default {
   name: "PitchingStatTotal",
   data() {
@@ -41,16 +43,7 @@ export default {
 
   computed: {
     era() {
-      let temp = (this.stats.er * 27 / this.stats.ip).toFixed(2);
-
-      if(temp > 99.99) {
-        return 99.99;
-      }
-      else if(isNaN(temp)) {
-        return Number(0).toFixed(2);
-      }
-
-      return temp;
+      return calERA(this.stats.er, this.stats.ip);
     },
 
     inningInput: {
@@ -58,14 +51,7 @@ export default {
         if (this.isInputActive) {
           return this.$props.stats.ip;
         } else {
-          let I = parseInt(this.$props.stats.ip / 3);
-          let i = this.$props.stats.ip % 3;
-
-          if (i > 0) {
-            I += '.' + i;
-          }
-
-          return I;
+          return formatInning(this.$props.stats.ip)
         }
       },
       set(newValue) {

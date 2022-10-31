@@ -50,7 +50,7 @@
 <script>
 import BattingStat from "@/components/BattingStat";
 import BattingStatTotal from "@/components/BattingStatTotal";
-import {Batter} from "@/class";
+import {Batter} from "@/utils/class";
 
 export default {
   name: "BattingStatBoard",

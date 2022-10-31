@@ -183,6 +183,8 @@
 
 <script>
 
+import {formatInning} from "@/utils/statCalculator";
+
 export default {
   name: "PitchingStat",
   data() {
@@ -279,14 +281,7 @@ export default {
         if (this.isInputActive) {
           return this.$props.pitcher.ip;
         } else {
-          let I = parseInt(this.$props.pitcher.ip / 3);
-          let i = this.$props.pitcher.ip % 3;
-
-          if (i > 0) {
-            I += '.' + i;
-          }
-
-          return I;
+          return formatInning(this.$props.pitcher.ip);
         }
       },
       set(newValue) {

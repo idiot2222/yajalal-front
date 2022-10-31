@@ -42,7 +42,7 @@
 <script>
 import TabTitle from "@/components/TabTitle";
 import {mapState} from "vuex";
-import apiUtils from "@/apiUtils";
+import apiUtils from "@/utils/apiUtils";
 import TeamRankingBox from "@/components/TeamRankingBox";
 import RankingBox from "@/components/PlayerRankingBox";
 

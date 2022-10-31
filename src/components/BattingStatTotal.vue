@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import {calAVG} from "@/utils/statCalculator";
+
 export default {
   name: "BattingStatTotal",
   data() {
@@ -52,11 +54,7 @@ export default {
     avg() {
       const temp = this.$props.stats;
 
-      if(temp.ab === 0) {
-        return temp.ab.toFixed(3);
-      }
-
-      return ((temp.h + temp.h2 + temp.h3 + temp.hr) / temp.ab).toFixed(3);
+      return calAVG(temp.h + temp.h2 + temp.h3 + temp.hr, temp.ab);
     }
   },
 

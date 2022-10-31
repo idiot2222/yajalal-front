@@ -55,7 +55,7 @@
 <script>
 import PitchingStat from "@/components/PitchingStat";
 import PitchingStatTotal from "@/components/PitchingStatTotal";
-import {Pitcher} from "@/class";
+import {Pitcher} from "@/utils/class";
 
 export default {
   name: "PitchingStatBoard",

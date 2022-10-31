@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import apiUtils from "@/apiUtils";
+import apiUtils from "@/utils/apiUtils";
 
 export default {
   name: "LoginPage",
