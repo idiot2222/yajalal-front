@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import apiUtils from "@/apiUtils";
+import apiUtils from "@/utils/apiUtils";
 import {createVuexPersistedState} from "vue-persistedstate/src/main";
 
 Vue.use(Vuex);

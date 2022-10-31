@@ -133,6 +133,30 @@ const apiUtils = {
                 console.log(err);
             });
     },
+    getPlayerBattingStats(playerId) {
+        return axios
+            .get(`${server}/player/stats/batting/${playerId}`, {
+                headers: {
+                    'Authorization': jwt()
+                }
+            })
+            .catch(err => {
+                jwtCheck(err);
+                console.log(err);
+            });
+    },
+    getPlayerPitchingStats(playerId) {
+        return axios
+            .get(`${server}/player/stats/pitching/${playerId}`, {
+                headers: {
+                    'Authorization': jwt()
+                }
+            })
+            .catch(err => {
+                jwtCheck(err);
+                console.log(err);
+            });
+    },
     updatePlayerInfo(userId, dto) {
         return axios
             .post(`${server}/player/update/${userId}`, dto, {
