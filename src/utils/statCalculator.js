@@ -1,3 +1,5 @@
+// batter
+
 export function calAVG(h, ab) {
     const t = h / ab;
 
@@ -7,6 +9,8 @@ export function calAVG(h, ab) {
 
     return t.toFixed(3);
 }
+
+// pitcher
 
 export function calERA(er, ip) {
     let temp = (er * 27 / ip).toFixed(2);
@@ -19,6 +23,16 @@ export function calERA(er, ip) {
     }
 
     return temp;
+}
+
+export function calKRate(k, ip) {
+    const temp = k * 27 / ip;
+
+    return temp.toFixed(1);
+}
+
+export function calBBRate(bb, ip) {
+    return calKRate(bb, ip);
 }
 
 export function formatInning(ip) {
