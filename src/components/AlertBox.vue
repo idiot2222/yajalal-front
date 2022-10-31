@@ -2,7 +2,7 @@
   <v-alert
       class="alert"
       :value="value"
-      :color="subColor"
+      :color="alertColor"
       dark
       transition="scroll-y-reverse-transition"
   >
@@ -20,12 +20,14 @@ export default {
     }
   },
   methods: {},
-  components: {},
-  props: ['message', 'value'],
+  props: ['message', 'value', 'color'],
   computed: {
     ...mapState({
       subColor: state => state.subColor,
-    })
+    }),
+    alertColor() {
+      return this.$props.color || this.subColor;
+    }
   },
 }
 </script>

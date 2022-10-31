@@ -37,8 +37,15 @@
     </div>
 
     <AlertBox
+        message="저장 실패"
+        :value="failAlert"
+        :color="'red'"
+    />
+
+    <AlertBox
         message="저장 완료"
-        :value="alertState"
+        :value="successAlert"
+        :color="''"
     />
 
   </v-container>
@@ -58,7 +65,8 @@ export default {
   data() {
     return {
       players: [],
-      alertState: false,
+      successAlert: false,
+      failAlert: false,
     }
   },
   methods: {
@@ -79,6 +87,8 @@ export default {
     },
     submit() {
       if(!this.validate()) {
+        this.fail();
+
         return;
       }
 
@@ -101,12 +111,19 @@ export default {
           });
     },
     success() {
-      this.alertState = true;
+      this.successAlert = true;
 
       setTimeout(() => {
-        this.alertState = false
+        this.successAlert = false
 
         window.location.reload();
+      }, 1000);
+    },
+    fail() {
+      this.failAlert = true;
+
+      setTimeout(() => {
+        this.failAlert = false
       }, 1000);
     },
     getPlayers() {
